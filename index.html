@@ -86,7 +86,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:60;height:73rem;display:flex;
 }
 
 /* about */
-.about{height:2250rem;background:#000}
+.about{height:1470rem;background:#000}
 .about .shape{position:absolute;left:0;top:0;width:100%;height:2581rem;object-fit:cover;pointer-events:none;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
 .about::before{content:"";position:absolute;left:0;right:0;top:0;height:420rem;background:linear-gradient(#000,transparent);z-index:1}
 .svc{z-index:2}
@@ -97,18 +97,18 @@ header{position:fixed;top:0;left:0;right:0;z-index:60;height:73rem;display:flex;
 .fl img{width:100%;height:100%;object-fit:cover}
 .fl1{left:63rem;top:408rem;width:292rem;height:270rem}
 .fl2{left:586rem;top:595rem;width:246rem;height:250rem}
-.fl3{left:273rem;top:1035rem;width:197rem;height:262rem;z-index:4}
+.fl3{left:273rem;top:860rem;width:197rem;height:262rem;z-index:4}
 .fl4{display:none}
-.logos{position:absolute;left:0;right:0;top:1795rem;display:flex;overflow:hidden;z-index:3}
+.logos{position:absolute;left:0;right:0;top:1170rem;display:flex;overflow:hidden;z-index:3}
 .logos .t{display:flex;gap:16rem;padding-right:16rem;flex:none;animation:mq 34s linear infinite}
 .logos .p{height:100rem;min-width:200rem;padding:0 44rem;border:1px solid rgba(255,255,255,.3);border-radius:var(--pill);display:grid;place-items:center;background:rgba(0,0,0,.3)}
 .logos img{height:30rem;width:auto;opacity:.9}
 @keyframes mq{to{transform:translateX(-100%)}}
 @media(max-width:819px){
-  .about{height:1700rem}.about .lab{top:70rem}
+  .about{height:1130rem}.about .lab{top:70rem}
   .stm{width:350rem;top:120rem;font-size:34rem;line-height:36rem;letter-spacing:-1.5rem}
-  .fl1{left:16rem;top:430rem;width:170rem;height:210rem}.fl2{left:200rem;top:560rem;width:160rem;height:170rem}.fl3{left:60rem;top:860rem;width:150rem;height:210rem}.fl4{left:150rem;top:1100rem;width:220rem;height:180rem}
-  .logos{top:1450rem}.logos .p{height:64rem;min-width:130rem;padding:0 26rem}.logos img{height:20rem}
+  .fl1{left:16rem;top:430rem;width:170rem;height:210rem}.fl2{left:200rem;top:560rem;width:160rem;height:170rem}.fl3{left:60rem;top:760rem;width:150rem;height:210rem}.fl4{display:none}
+  .logos{top:1010rem}.logos .p{height:64rem;min-width:130rem;padding:0 26rem}.logos img{height:20rem}
 }
 
 /* services */
@@ -555,7 +555,7 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   const sw=$$('#stm .w');ScrollTrigger.create({trigger:'.about',start:'top 60%',end:'top -10%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*sw.length);sw.forEach((w,i)=>{w.style.color=(i<11||i<n)?'#fff':''})}});
   const qw=$$('#tq .w');ScrollTrigger.create({trigger:'#tq',start:'top 80%',end:'bottom 45%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*qw.length);qw.forEach((w,i)=>w.style.color=i<n?'#fff':'')}});
   // floating images rise as you scroll down (each at its own speed)
-  $$('.fl').forEach(el=>{const s=Math.abs(+el.dataset.par)/80;gsap.fromTo(el,{y:s*220},{y:-s*520,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}})});
+  $$('.fl').forEach(el=>{const s=Math.abs(+el.dataset.par)/80;gsap.fromTo(el,{y:s*150},{y:-s*340,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}})});
   $$('.imgw img,.bleed img').forEach(el=>gsap.fromTo(el,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
   // services: the centred word lights up
   $$('#svc li').forEach(li=>ScrollTrigger.create({trigger:li,start:'top 62%',end:'bottom 38%',toggleClass:{targets:li,className:'on'}}));
