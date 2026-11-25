@@ -554,7 +554,8 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   // statement: dim tail brightens as you scroll
   const sw=$$('#stm .w');ScrollTrigger.create({trigger:'.about',start:'top 60%',end:'top -10%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*sw.length);sw.forEach((w,i)=>{w.style.color=(i<11||i<n)?'#fff':''})}});
   const qw=$$('#tq .w');ScrollTrigger.create({trigger:'#tq',start:'top 80%',end:'bottom 45%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*qw.length);qw.forEach((w,i)=>w.style.color=i<n?'#fff':'')}});
-  $$('.fl').forEach(el=>gsap.to(el,{y:+el.dataset.par,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:true}}));
+  // floating images rise as you scroll down (each at its own speed)
+  $$('.fl').forEach(el=>{const s=Math.abs(+el.dataset.par)/80;gsap.fromTo(el,{y:s*220},{y:-s*520,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}})});
   $$('.imgw img,.bleed img').forEach(el=>gsap.fromTo(el,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
   // services: the centred word lights up
   $$('#svc li').forEach(li=>ScrollTrigger.create({trigger:li,start:'top 62%',end:'bottom 38%',toggleClass:{targets:li,className:'on'}}));
