@@ -55,8 +55,9 @@ section{position:relative}
   background:var(--pill-bg);opacity:var(--shoulder);pointer-events:none;transition:opacity .9s ease .1s}
 .site-header__bar::before{right:100%;-webkit-mask:radial-gradient(circle at 0 100%,transparent var(--bar-r),#000 calc(var(--bar-r) + .5px));mask:radial-gradient(circle at 0 100%,transparent var(--bar-r),#000 calc(var(--bar-r) + .5px))}
 .site-header__bar::after{left:100%;-webkit-mask:radial-gradient(circle at 100% 100%,transparent var(--bar-r),#000 calc(var(--bar-r) + .5px));mask:radial-gradient(circle at 100% 100%,transparent var(--bar-r),#000 calc(var(--bar-r) + .5px))}
-.nav-links{display:flex;gap:28rem}
-.nav-links a,.nav-links a:hover,.nav-links a:focus-visible{position:relative;font:500 12rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--bar-fg);padding:6rem 0}
+.nav-links{display:flex;gap:16rem}
+.nav-end .nav-links{margin-inline-end:10rem}
+.nav-links a,.nav-links a:hover,.nav-links a:focus-visible{position:relative;font:500 max(12rem,11px)/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--bar-fg);padding:6rem 0}
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s ease}
 .nav-links a:hover::after,.nav-links a:focus-visible::after,.nav-links a[aria-current]::after{transform:scaleX(1);transform-origin:left}
 .logo{position:relative;display:block;justify-self:center}
@@ -91,7 +92,7 @@ html[lang=ar] .stm,html[lang=ar] .q,html[lang=ar] .acard h4,html[lang=ar] .plan 
 html[lang=ar] .logos,html[lang=ar] .cta .mq,html[lang=ar] .pgrid{direction:ltr}
 html[lang=ar] input[type=email],html[lang=ar] input[type=tel]{direction:ltr;text-align:right}
 html[lang=ar] .loc .ph,html[lang=ar] .loc .g{direction:ltr;text-align:center}
-html[lang=ar] .nav-links a{font-size:14rem}
+html[lang=ar] .nav-links a{font-size:max(13rem,12px)}
 html[dir=rtl] .nav-cta svg{transform:scaleX(-1)}html[dir=rtl] .nav-cta:hover svg{transform:scaleX(-1) translateX(4px)}
 .lang-btn{display:inline-grid;place-items:center;min-width:44rem;height:44rem;padding:0 10rem;border:1px solid currentColor;border-radius:12rem;color:var(--bar-fg);font:600 13rem/1 'IBM Plex Sans Arabic',var(--body);letter-spacing:.04em;transition:background-color .3s,color .3s}
 .lang-btn:hover{background:var(--bar-fg);color:var(--pill-bg)}
@@ -102,25 +103,27 @@ html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
 .cur-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--accent)}
 .cur-ring{width:36px;height:36px;margin:-18px 0 0 -18px;border:1px solid rgba(224,184,74,.6);transition:opacity .3s,width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background-color .35s}
 .cur-ring.big{width:70px;height:70px;margin:-35px 0 0 -35px;background:rgba(224,184,74,.08)}
-.menu{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.97);display:grid;align-content:center;justify-items:start;padding:0 var(--pad);transform:translateY(-102%);transition:transform .7s var(--ease)}
+.menu{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.97);display:grid;align-content:center;overflow-y:auto;padding-block:90rem 40rem;justify-items:start;padding:0 var(--pad);transform:translateY(-102%);transition:transform .7s var(--ease)}
 .menu.open{transform:none}
 .menu small{font:500 16rem var(--body);color:var(--mute);margin-bottom:12rem}
-.menu a{font:var(--dw) clamp(60px,11vw,170px)/.95 var(--display);transition:color .25s,padding .35s var(--ease)}
+.menu a{font:var(--dw) clamp(34px,5.4vh,64px)/1.1 var(--display);transition:color .25s,padding .35s var(--ease)}
 .menu a:hover{color:var(--glow);padding-inline-start:24rem}
 
 /* hero */
 .hero{height:885rem;overflow:hidden;background:#0A0A0A}
 /* scroll-3d: each layer moves at its own speed (translate/scale props, so they stack with the GSAP intro transforms; !important because GSAP writes inline translate:none) */
-.hero [data-depth]{translate:0 var(--y,0px)!important;will-change:transform,translate}
+.hero [data-depth]{translate:0 var(--y,0px)!important}
+/* only images get their own GPU layer; text layers stay un-promoted and move in whole pixels so glyphs stay sharp */
+.hero img[data-depth]{will-change:transform,translate}
 .hero #phone{scale:var(--s,1)!important;transform-origin:50% 75%}
 .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200rem;background:linear-gradient(transparent,#0A0A0A);z-index:1}
 .hero .tag{position:absolute;left:30rem;top:120rem;font:var(--dw) 64rem/64rem var(--display);letter-spacing:-3.25rem;color:rgba(245,239,227,.3);z-index:3}
 .hero h1{position:absolute;left:30rem;top:184rem;font:var(--dw) 200rem/200rem var(--display);letter-spacing:-10rem;z-index:3;white-space:nowrap}
 .phoneimg{position:absolute;left:303rem;top:6rem;width:760rem;z-index:2;will-change:transform}
-.wedo{position:absolute;right:30rem;top:173rem;text-align:right;z-index:3;font:400 24rem/32rem var(--body)}
+.wedo{position:absolute;right:30rem;top:173rem;text-align:right;z-index:3;font:400 24rem/32rem var(--body);text-shadow:0 1px 14px rgba(10,10,10,.7)}
 .wedo small{display:block;font:400 18rem/28rem var(--body);margin-bottom:14rem;color:#F5EFE3}
-.wedo span{display:block;color:#808080;margin-bottom:10rem;transition:color .5s}
+.wedo span{display:block;color:var(--mute);margin-bottom:10rem;transition:color .5s}
 .wedo span.on{color:#F5EFE3}
 .badge{position:absolute;left:25rem;top:453rem;width:155rem;z-index:3;animation:spin 20s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -141,7 +144,8 @@ html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
 
 /* about */
 .about{height:1470rem;background:#0A0A0A}
-.about .shape{position:absolute;left:0;top:0;width:100%;height:2581rem;object-fit:cover;pointer-events:none;-webkit-mask-image:linear-gradient(#0A0A0A 78%,transparent);mask-image:linear-gradient(#0A0A0A 78%,transparent)}
+/* brand-colour glow drawn in CSS (the old 649px orange image was stretched and pixelated); fine noise stops gradient banding */
+.about .shape{position:absolute;left:0;top:0;width:100%;height:2581rem;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E"),radial-gradient(70% 38% at 25% 92%,rgba(224,184,74,.42),transparent 70%),radial-gradient(60% 34% at 85% 80%,rgba(156,122,42,.5),transparent 70%),linear-gradient(165deg,#0A0A0A 22%,#16130c 45%,#3a2c10 70%,#7a5e22 100%);pointer-events:none;-webkit-mask-image:linear-gradient(#0A0A0A 78%,transparent);mask-image:linear-gradient(#0A0A0A 78%,transparent)}
 .about::before{content:"";position:absolute;left:0;right:0;top:0;height:420rem;background:linear-gradient(#0A0A0A,transparent);z-index:1}
 .svc{z-index:2}
 .about .lab{position:absolute;left:0;right:0;top:104rem;display:flex;justify-content:center;z-index:3}
@@ -169,12 +173,12 @@ html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
 .svc{padding:40rem 0 0}
 .svc .top{padding:0 var(--pad)}
 .svc ul{list-style:none;padding:0;margin-top:86rem}
-.svc li{position:relative;display:flex;justify-content:center;align-items:flex-start;height:200rem}
+.svc li{position:relative;display:flex;justify-content:center;align-items:flex-start;height:168rem;padding-top:36rem}
 .svc li .n{position:absolute;font:500 32rem/40rem var(--body);letter-spacing:-.32rem;color:var(--accent);margin-top:0}
-.svc li h3{font:var(--dw) 200rem/200rem var(--display);letter-spacing:-10rem;color:var(--dim);transition:color .4s,filter .6s;white-space:nowrap}
+.svc li h3{font:var(--dw) 116rem/132rem var(--display);letter-spacing:-5rem;color:var(--dim);transition:color .4s,filter .6s;white-space:nowrap}
 .svc li.on h3{color:#F5EFE3}
 .svc li:hover h3{color:var(--glow)}
-@media(max-width:819px){.svc ul{margin-top:36rem}.svc li{height:92rem}.svc li h3{font-size:92rem;line-height:92rem;letter-spacing:-4rem}.svc li .n{font-size:18rem;line-height:24rem;left:var(--pad)}}
+@media(max-width:819px){.svc ul{margin-top:36rem}.svc li{height:auto;padding:22rem var(--pad) 8rem}.svc li h3{font-size:44rem;line-height:48rem;letter-spacing:-1.5rem;white-space:normal;text-align:center}.svc li .n{font-size:18rem;line-height:24rem;left:var(--pad)}}
 
 /* projects */
 .proj{padding-top:120rem}
@@ -186,36 +190,9 @@ html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
 .proj .ab{margin-top:30rem}.proj .ab b{display:block;font-weight:400}.proj .ab p{color:var(--mute);width:405rem;margin-top:12rem}
 @media(max-width:819px){.proj{padding-top:70rem}.proj .imgw{width:calc(100% - 32rem);height:230rem;margin-top:24rem}.proj h2{font-size:42rem;line-height:42rem;letter-spacing:-2rem}.proj h2 sup{font-size:18rem}.proj .ab p{width:auto}.row3{grid-template-columns:auto 1fr;gap:8rem 14rem;font-size:13rem}.row3>:last-child{grid-column:1/-1;justify-self:start;text-align:left}.row3 .mid{justify-self:end}}
 
-/* founder */
-.founder{height:720rem;margin-top:120rem}
-.founder .lab{position:absolute;left:30rem;top:210rem}
-.founder .rule{position:absolute;left:30rem;top:276rem;width:300rem;border-top:1px solid var(--line)}
-.founder .fy{position:absolute;left:30rem;top:310rem;font-size:14rem;line-height:20rem;color:var(--mute)}
-.founder .fy b{display:block;font:400 18rem/28rem var(--body);color:#F5EFE3}
-.founder .mosaic{position:absolute;left:300rem;top:90rem;width:460rem;height:480rem;overflow:hidden;background:#0a0a0a}
-.founder .mosaic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.founder .mosaic canvas{position:absolute;inset:0;width:100%;height:100%}
-.founder .txt{position:absolute;right:30rem;top:290rem;width:203rem;color:var(--mute)}
-@media(max-width:819px){.founder{height:620rem;margin-top:60rem}.founder .lab{left:16rem;top:30rem}.founder .rule{display:none}.founder .fy{left:16rem;top:76rem}.founder .mosaic{left:16rem;right:16rem;width:auto;top:150rem;height:300rem}.founder .txt{left:16rem;right:16rem;width:auto;top:480rem}}
-
-/* full bleed + awards */
+/* full bleed */
 .bleed{height:900rem;overflow:hidden}
 .bleed img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;will-change:transform}
-.awards{padding:90rem 0 0}
-.ah{font:var(--dw) 200rem/200rem var(--display);letter-spacing:-10rem;padding:0 var(--pad)}
-.ah .l{display:flex;align-items:center;gap:22rem;white-space:nowrap}
-.ah .l img{width:260rem;height:100rem;object-fit:cover;border-radius:60rem}
-.ah .l3{color:var(--dim)}
-.acards{width:854rem;margin:80rem auto 0;display:grid;gap:22rem}
-.acard{display:grid;grid-template-columns:267rem 1fr;gap:34rem;border:1px solid var(--line);background:#0a0a0a;border-radius:16rem;padding:20rem;transition:border-color .3s,transform .5s var(--ease)}
-.acard:hover{border-color:rgba(224,184,74,.7);transform:translateY(-6rem)}
-.acard .tile{height:268rem;border-radius:10rem;background:#0A0A0A center/cover;display:grid;place-items:center;overflow:hidden}
-.acard .tile img{width:70%}
-.acard .tx{display:flex;flex-direction:column;justify-content:space-between;position:relative}
-.acard h4{font:var(--dw) 48rem/52rem var(--display);letter-spacing:-2rem;width:324rem;font-weight:400}
-.acard .no{position:absolute;right:6rem;top:0;color:var(--mute)}
-.acard p{color:var(--mute);width:253rem}
-@media(max-width:819px){.awards{padding-top:60rem}.ah{font-size:66rem;line-height:70rem;letter-spacing:-3rem}.ah .l{white-space:normal;flex-wrap:wrap;gap:8rem}.ah .l img{width:78rem;height:34rem}.acards{width:calc(100% - 32rem);margin-top:40rem}.acard{grid-template-columns:1fr}.acard .tile{height:230rem}.acard h4{width:auto;font-size:38rem;line-height:40rem}.acard p{width:auto;margin-top:12rem}.acard .tx{gap:10rem}}
 
 /* stats */
 .stats{padding:90rem 0 0;overflow:hidden}
@@ -235,26 +212,6 @@ html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
 .bigtxt{position:absolute;left:-148rem;bottom:-40rem;width:1662rem;font:var(--dw) 400rem/400rem var(--display);letter-spacing:-20rem;text-align:center;color:#0A0A0A;background:linear-gradient(transparent 30%,rgba(224,184,74,.55));-webkit-background-clip:text;background-clip:text;pointer-events:none;white-space:nowrap}
 @media(max-width:819px){.stats .nums{grid-template-columns:1fr;gap:40rem}.stats .nums b{font-size:96rem;line-height:96rem}.stats .c{display:none}.stats .nums p{width:auto}.exp{margin-top:120rem;padding-bottom:420rem}.exp h3{font-size:56rem;line-height:56rem;letter-spacing:-2.5rem}.exp h4{font-size:30rem}.oval{width:190rem;height:84rem;font-size:26rem;letter-spacing:4rem}.o1{left:10rem;top:260rem}.o2{left:190rem;top:240rem}.o3{left:90rem;top:340rem}.bigtxt{font-size:170rem;line-height:170rem;letter-spacing:-9rem;left:-30rem;width:450rem}.rings{width:700rem;height:700rem;top:300rem}}
 
-/* team */
-.team{padding-top:70rem}
-.team .intro{padding:0 var(--pad)}
-.team .intro p{width:400rem;color:var(--mute)}
-.team .intro .pill-l{margin-top:12rem}
-.team h2{font:var(--dw) 200rem/200rem var(--display);letter-spacing:-10rem;padding:30rem var(--pad) 0;margin-bottom:60rem}
-.mem{display:grid;grid-template-columns:286rem 1fr;gap:0;border-top:1px solid var(--line);padding:24rem var(--pad);min-height:358rem}
-.mem:last-child{border-bottom:1px solid var(--line)}
-.mem .ph{height:310rem;border-radius:12rem;overflow:hidden}
-.mem .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
-.mem:hover .ph img{transform:scale(1.06)}
-.mem .tx{display:flex;flex-direction:column;padding-left:0;justify-content:space-between}
-.mem .tx>div:first-child{display:grid;gap:14rem}
-.mem .tx b{font:500 32rem/40rem var(--body);letter-spacing:-.32rem}
-.soc{display:flex;gap:18rem;color:#777}
-.soc svg{width:18rem;height:18rem;fill:none;stroke:currentColor;stroke-width:1.5}
-.soc a:hover{color:#F5EFE3}
-.roles{display:flex;gap:10rem}
-.roles span{font:400 12rem/16rem var(--body);border:1px solid rgba(245,239,227,.3);border-radius:var(--pill);padding:6rem 14rem}
-@media(max-width:819px){.team{padding-top:50rem}.team h2{font-size:84rem;line-height:84rem;letter-spacing:-4rem;margin-bottom:30rem}.team .intro p{width:auto}.mem{grid-template-columns:1fr;gap:14rem}.mem .ph{height:300rem}}
 
 /* playground */
 .play{padding:150rem 0 0;overflow:hidden}
@@ -385,35 +342,36 @@ html.loading,html.loading body{overflow:hidden}
 
 <header class="site-header" id="hd">
   <div class="site-header__bar">
-    <nav class="nav-links" aria-label="Primary"><a href="#works">Works</a><a href="#services">Services</a><a href="#about">About</a><a href="#pricing">Pricing</a></nav>
+    <nav class="nav-links" aria-label="Primary"><a href="#about">About</a><a href="#services">Services</a><a href="#works">Works</a><a href="#stats">Stats</a></nav>
     <a class="logo" href="#top" aria-label="Ta2m Studio home"><img class="lg-l" src="img/logo.webp" alt="Ta2m Studio" width="480" height="256"><img class="lg-d" src="img/logo-dark.webp" alt="" width="480" height="256"></a>
     <div class="nav-end">
+      <nav class="nav-links" aria-label="More"><a href="#playground">Playground</a><a href="#pricing">Pricing</a><a href="#location">Location</a></nav>
       <a class="lang-btn" id="langBtn" href="?lang=en" hreflang="en" lang="en">EN</a>
       <a class="nav-cta" href="#contact">Contact<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
     </div>
   </div>
 </header>
-<nav class="menu" id="menu" aria-label="Main" inert><small>[ Menu ]</small><a href="#top">Home</a><a href="#works">Works</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+<nav class="menu" id="menu" aria-label="Main" inert><small>[ Menu ]</small><a href="#top">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#works">Works</a><a href="#stats">Stats</a><a href="#playground">Playground</a><a href="#pricing">Pricing</a><a href="#location">Location</a><a href="#contact">Contact</a></nav>
 <div class="toast" id="toast" role="status"></div>
 
 <main id="top">
 <!-- HERO -->
 <section class="hero">
   <img class="bg" id="hbg" src="img/hero.webp" alt="" fetchpriority="high">
-  <span class="tag" data-depth=".25">Design st ‘25</span>
+  <span class="tag" data-depth=".25">Design st ‘26</span>
   <h1 id="h1" data-depth=".2">TA2M</h1>
   <img class="phoneimg" id="phone" data-depth="phone" src="img/phone.webp" alt="A phone showing the Ta2m Studio logo resting on a black rock" fetchpriority="high">
-  <div class="wedo" id="wedo" data-depth="-.05"><small>/we do</small><span class="on">BRANDING</span><span>ART DIRECTION</span><span>MOTION</span></div>
+  <div class="wedo" id="wedo" data-depth="-.05"><small>we do</small><span class="on">Software Development</span><span>Shooting &amp; Editing</span><span>Graphic Design</span></div>
   <img class="badge" data-depth="-.12" src="img/badge.webp" alt="" aria-hidden="true">
   <span class="copy" data-depth="-.08" aria-hidden="true">©</span>
-  <span class="year" lang="en" data-depth=".35" aria-hidden="true">2025</span>
+  <span class="year" lang="en" data-depth=".35" aria-hidden="true">2026</span>
   <div class="begin" data-depth="-.2" aria-label="Let’s begin"><span>Let’s</span><img src="img/pill.webp" alt=""><span>BEGIN</span></div>
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <img class="shape" src="img/shape.webp" alt="" aria-hidden="true">
+  <div class="shape" aria-hidden="true"></div>
   <div class="lab"><span class="pill-l"><b>About</b><i>01</i></span></div>
   <p class="stm" id="stm">As a tight-knit team of experts, we create memorable and emotional websites, digital experiences, and native apps.</p>
   <div class="fl fl1" data-par="-80"><img src="img/rock-ring.webp" alt="" loading="lazy"></div>
@@ -433,31 +391,11 @@ html.loading,html.loading body{overflow:hidden}
 <div id="works"></div>
 <div id="projs"></div>
 
-<!-- FOUNDER -->
-<section class="founder">
-  <div class="lab" data-r><span class="pill-l"><b>Founder</b><i>04</i></span></div>
-  <div class="rule"></div>
-  <div class="fy" data-r>Founded Ta2m<b>2023</b></div>
-  <div class="mosaic" id="mosaic"><img src="img/p3.webp" alt="A silhouette lit in orange" loading="lazy"><canvas id="mcv"></canvas></div>
-  <p class="txt" data-r>He work with passion and creative. Over 15+ years experience. Willing to make more exceptional.</p>
-</section>
-
 <!-- FULL BLEED -->
 <section class="bleed reveal"><img src="img/p2.webp" alt="A phone drifting among glowing rocks" loading="lazy"></section>
 
-<!-- AWARDS -->
-<section class="awards">
-  <div class="top row3 pad" style="margin-bottom:80rem" data-r><span class="pill-l"><b>Awards</b><i>05</i></span><span></span><span></span></div>
-  <h2 class="ah" aria-label="We’ve Achieved Through ‘24 Is The Massive">
-    <div class="l" data-r>We’ve Achieved</div>
-    <div class="l" data-r>Through <img src="img/pill2.webp" alt=""> ‘24</div>
-    <div class="l l3" data-r>Is The Massive</div>
-  </h2>
-  <div class="acards" id="aw"></div>
-</section>
-
 <!-- STATS -->
-<section class="stats">
+<section class="stats" id="stats">
   <svg class="rings" viewBox="-500 -500 1000 1000" aria-hidden="true"><g fill="none" stroke="rgba(245,239,227,.12)"><circle r="499"/><circle r="380"/><circle r="270"/></g></svg>
   <div class="row3" data-r><span class="pill-l"><b>Statistic</b><i>06</i></span><span class="c g">We have significant growth through the years</span><span>Updated: <b style="font-weight:500">July 2025</b></span></div>
   <div class="nums">
@@ -467,19 +405,13 @@ html.loading,html.loading body{overflow:hidden}
   <div class="exp">
     <h3 data-r>For 10+<br>Experience</h3><div class="hr"></div><h4>YOU’LL GET</h4>
     <div class="oval o1">CREATIVE</div><div class="oval o2">DYNAMIC</div><div class="oval o3">QUALITY</div>
-    <div class="bigtxt" lang="en" aria-hidden="true">Ta2m /25</div>
+    <div class="bigtxt" lang="en" aria-hidden="true">Ta2m /26</div>
   </div>
 </section>
 
-<!-- TEAM -->
-<section class="team">
-  <div class="intro" data-r><p>/ We focus on quality products that drive result /</p><span class="pill-l"><b>Team Member</b><i>07</i></span></div>
-  <h2 data-r>Creative Team</h2>
-  <div id="tg"></div>
-</section>
 
 <!-- PLAYGROUND -->
-<section class="play">
+<section class="play" id="playground">
   <h2 data-r>Ta2m’s Playground</h2>
   <div class="pgrid" id="pg" aria-hidden="true"></div>
   <div class="pcap">
@@ -497,7 +429,7 @@ html.loading,html.loading body{overflow:hidden}
 </section>
 
 <!-- LOCATION -->
-<section class="loc">
+<section class="loc" id="location">
   <h2 data-r>Location</h2>
   <p class="ph" data-r>(323) 238-0614</p>
   <p class="g" data-r>909-1/2 E 49th St<br>Los Angeles, California(CA), 90011</p>
@@ -532,7 +464,7 @@ html.loading,html.loading body{overflow:hidden}
     <div><h4>[ More Pages ]</h4><a href="#top">PRIVACY POLICIES</a><a href="#top">404</a></div>
   </div>
   <div class="fw" aria-hidden="true">TA2M</div>
-  <div class="fbot"><span>© 2025 Ta2m. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
+  <div class="fbot"><span>© 2026 Ta2m. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -546,7 +478,7 @@ const LANG=document.documentElement.lang==='en'?'en':'ar',AR=LANG==='ar';
 const T={
 'Works':'شغلنا','Services':'خدماتنا','About':'مين احنا','Pricing':'الباكدجات','Contact':'كلّمنا','[ Menu ]':'[ القايمة ]','Home':'الرئيسية','Menu':'القايمة',
 'Open menu':'افتح القايمة','Close menu':'اقفل القايمة','Ta2m Studio home':'طقم ستوديو، الرئيسية','Primary':'الأساسية','Main':'القايمة',
-'Design st ‘25':'ستوديو ٢٠٢٥','TA2M':'طقم','/we do':'/بنعمل','BRANDING':'هوية','ART DIRECTION':'آرت دايركشن','MOTION':'موشن',
+'Design st ‘26':'ستوديو ٢٠٢٦','TA2M':'طقم','we do':'بنعمل','Shooting & Editing':'تصوير ومونتاج','Web Development':'تطوير مواقع','Software Development':'برمجة سوفتوير','Mobile Apps':'تطبيقات موبايل','Logo & Identity':'لوجو وهوية','Social Media Posts':'بوستات سوشيال ميديا','Brand Guidelines':'دليل الهوية','Photo Editing':'تعديل الصور','Ad Creatives':'تصميمات إعلانات','Print & Packaging':'مطبوعات وتغليف','Graphic Design':'جرافيك ديزاين',
 'Let’s':'يلا','BEGIN':'نبدأ','Let’s begin':'يلا نبدأ',
 'A phone showing the Ta2m Studio logo resting on a black rock':'موبايل عليه لوجو طقم ستوديو فوق صخرة سودا',
 'As a tight-knit team of experts, we create memorable and emotional websites, digital experiences, and native apps.':'Ta2m Studio ستوديو مصري بيبني للبراند هويته كلها في مكان واحد: التصوير والتصميم والموقع، وكلهم بنفس الروح.',
@@ -560,7 +492,7 @@ const T={
 'Founder':'المؤسس','Founded Ta2m':'أسّس طقم','2023':'٢٠٢٣',
 'He work with passion and creative. Over 15+ years experience. Willing to make more exceptional.':'بيشتغل بشغف وإبداع. خبرة أكتر من ١٥ سنة، ودايمًا عايز يعمل حاجة استثنائية.',
 'A silhouette lit in orange':'ظل شخص في إضاءة دافية','A phone drifting among glowing rocks':'موبايل طاير وسط صخور منوّرة',
-'Awards':'جوايز','We’ve Achieved':'اللي حققناه','Through':'في','‘24':'٢٠٢٤','Is The Massive':'كان كبير','We’ve Achieved Through ‘24 Is The Massive':'اللي حققناه في ٢٠٢٤ كان كبير',
+'Awards':'جوايز','Stats':'أرقام','Playground':'الملعب','More':'المزيد','We’ve Achieved':'اللي حققناه','Through':'في','‘24':'٢٠٢٤','Is The Massive':'كان كبير','We’ve Achieved Through ‘24 Is The Massive':'اللي حققناه في ٢٠٢٤ كان كبير',
 'SOTD FOR E-commerce Website':'موقع اليوم لمتجر إلكتروني','Every decision ties to KPIs (conversion, leads, ARPU, SEO).':'كل قرار مربوط بأرقام: التحويل، والعملاء، والـ SEO.',
 'Design That Drives Business':'تصميم بيحرّك البيزنس','Our decisions are KPI-led (conversion, leads, and SEO).':'قراراتنا ماشية بالأرقام: التحويل، والعملاء، والـ SEO.',
 'Business Website Of the Month':'موقع الشهر للبيزنس','Data-driven decisions focusing on (sales, growth, and Results).':'قرارات مبنية على الداتا: المبيعات، والنمو، والنتايج.',
@@ -592,7 +524,7 @@ const T={
 'Please enter a valid email.':'اكتب إيميل صحيح.','Please tell us a little about your project.':'احكيلنا شوية عن مشروعك.',
 'Thank you! We’ll respond within 24 hours. (Demo: nothing was sent.)':'شكرًا! هنرد عليك خلال ٢٤ ساعة. (ديمو: مفيش حاجة اتبعتت.)',
 'View Our Works':'شوف شغلنا','ABOUT US':'مين احنا','WORK':'شغلنا','CONTACT US':'كلّمنا','[ More Pages ]':'[ صفحات تانية ]','PRIVACY POLICIES':'سياسة الخصوصية',
-'© 2025 Ta2m. All rights reserved.':'© ٢٠٢٥ طقم. كل الحقوق محفوظة.','Back to top ↑':'ارجع لفوق ↑'
+'© 2026 Ta2m. All rights reserved.':'© ٢٠٢٦ طقم. كل الحقوق محفوظة.','Back to top ↑':'ارجع لفوق ↑'
 };
 const tr=t=>AR&&T[t]!==undefined?T[t]:t, num=n=>AR?n.toLocaleString('ar-EG'):String(n);
 function applyLang(){
@@ -620,21 +552,16 @@ $('#tq').innerHTML=words(tr($('#tq').textContent.trim()));
 const LG=['l1','l2','l3','l4'];$('#lg').innerHTML=$('#lg2').innerHTML=[...LG,...LG,...LG].map(l=>`<div class="p"><img src="img/${l}.svg" alt="" loading="lazy"></div>`).join('');
 
 // services
-$('#svc').innerHTML=[['01','Motion'],['02','Branding'],['03','Graphic']].map(s=>`<li data-r><span class="n">${s[0]}</span><h3>${s[1]}</h3></li>`).join('');
+$('#svc').innerHTML=['Shooting & Editing','Web Development','Software Development','Mobile Apps','Logo & Identity','Social Media Posts','Brand Guidelines','Photo Editing','Ad Creatives','Print & Packaging'].map((t,i)=>[String(i+1).padStart(2,'0'),t]).map(s=>`<li data-r><span class="n">${s[0]}</span><h3>${s[1]}</h3></li>`).join('');
 
 // projects
 const PR=[['01','UI Design','Levi Colwill','Modelling 3D Graphic','rock-ring','Levi Colwill Website Portfolio is a project build branding and web design for visionary brands clarity.','July 2025'],['02','App Design','The News','Mobile App UI','p1','A clean, modern news app designed to deliver information in real time without distractions.','Aug 2025'],['03','Branding','Theo Agency','Rebrand Project','glow','A complete rebrand for Theo Agency, crafted to reflect their growth from a boutique studio to a global partner.','Sep 2025']];
 $('#projs').innerHTML=PR.map(p=>`<section class="proj"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>${p[0]}</i></span><span class="mid"><span class="g">Project Type:</span> ${p[1]}</span><span><span class="g">Date</span> ${p[6]}</span></div><div class="imgw reveal" data-r><img src="${IM(p[4])}" alt="${p[2]} project" loading="lazy"></div><div class="info" data-r><h2>${p[2]}<sup>[${p[0]}]</sup><br>${p[3]}</h2><div class="ab"><b>[About This Project]</b><p>${p[5]}</p></div></div></section>`).join('');
 
-// awards
-$('#aw').innerHTML=[['a1','SOTD FOR E-commerce Website','Every decision ties to KPIs (conversion, leads, ARPU, SEO).','01'],['a2','Design That Drives Business','Our decisions are KPI-led (conversion, leads, and SEO).','02'],['a3','Business Website Of the Month','Data-driven decisions focusing on (sales, growth, and Results).','03']].map(a=>`<article class="acard" data-r><div class="tile" style="background-image:url(${IM('awards')})"><img src="img/${a[0]}.svg" alt="" loading="lazy"></div><div class="tx"><h4>${a[1]}</h4><span class="no">[${a[3]}]</span><p>${a[2]}</p></div></article>`).join('');
 
 // cta marquee
 $('#cmq').innerHTML=$('#cmq2').innerHTML=Array(6).fill('<span>Contact Us</span>').join('');
 
-// team
-const SOC='<div class="soc" aria-hidden="true"><a><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg></a><a><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></a><a><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a></div>';
-$('#tg').innerHTML=[['t1','Avery James','Co-Founder','Product Lead'],['t2','Lewis Adam','UI Design','Graphic'],['t3','Jordan Miles','Developer','Strategy']].map(m=>`<article class="mem" data-r><div class="ph reveal"><img src="${IM(m[0])}" alt="${m[1]}" loading="lazy"></div><div class="tx"><div><span class="g">[The Dynamic]</span><b>${m[1]}</b>${SOC}</div><div class="roles"><span>${m[2]}</span><span>${m[3]}</span></div></div></article>`).join('');
 
 // playground
 $('#pg').innerHTML=['cap','street','quote','g33','suit1','suit2'].map(n=>`<div><img src="${IM(n)}" alt="" loading="lazy"></div>`).join('');
@@ -660,7 +587,7 @@ const onScroll=[];
 (()=>{const hero=$('.hero'),ph=$('#phone'),layers=$$('.hero [data-depth]').filter(e=>e!==ph).map(e=>[e,+e.dataset.depth]);
   let heroH=hero.offsetHeight;addEventListener('resize',()=>{heroH=hero.offsetHeight;depth()});
   function depth(){const y=Math.min(scrollY,heroH);
-    for(const[e,k]of layers)e.style.setProperty('--y',(y*k).toFixed(1)+'px');
+    for(const[e,k]of layers)e.style.setProperty('--y',Math.round(y*k)+'px');
     const p=Math.min(y/800,1);ph.style.setProperty('--y',(-.14*Math.min(y,640)).toFixed(1)+'px');ph.style.setProperty('--s',(1+.12*(1-(1-p)**2)).toFixed(4))}
   depth();onScroll.push(depth)})();
 
@@ -681,11 +608,6 @@ addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 (function(){const sp=$$('#wedo span');let i=0;setInterval(()=>{sp[i].classList.remove('on');i=(i+1)%sp.length;sp[i].classList.add('on')},1500)})();
 (function(){const ws=$$('#words span');let i=0;setInterval(()=>{ws[i].classList.remove('on');i=(i+1)%ws.length;ws[i].classList.add('on')},1500)})();
 
-// founder mosaic: black squares that blink away over the image
-(function(){const cv=$('#mcv'),ctx=cv.getContext('2d');let cols=9,rows=10,cells=[];function size(){const r=cv.getBoundingClientRect();cv.width=r.width;cv.height=r.height}
-  size();addEventListener('resize',size);for(let i=0;i<cols*rows;i++)cells.push(Math.random()<.55?1:0);
-  function draw(){const w=cv.width/cols,h=cv.height/rows;ctx.clearRect(0,0,cv.width,cv.height);ctx.fillStyle='#0A0A0A';cells.forEach((c,i)=>{if(c)ctx.fillRect((i%cols)*w,Math.floor(i/cols)*h,w+1,h+1)})}
-  draw();setInterval(()=>{for(let k=0;k<6;k++){const i=Math.floor(Math.random()*cells.length);cells[i]=cells[i]?0:1}draw()},260)})();
 
 // scroll effects: always on (no reduced-motion gate); content stays visible if the CDNs are blocked
 if(window.gsap&&window.ScrollTrigger&&window.Lenis){
