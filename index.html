@@ -82,6 +82,14 @@ section{position:relative}
 }
 @media(max-width:480px){.nav-cta{display:none}}
 body.menu-lock{overflow:hidden}
+/* pages: one section per page; the next page fades/rises in like a card, the old one sinks away */
+.page{display:none;overflow:clip;transform-origin:50% 0;background:var(--bg)}
+.page.is-active{display:block;animation:card-in .85s cubic-bezier(.22,1,.36,1) both}
+.page.is-leaving{animation:card-out .38s cubic-bezier(.55,0,.75,.2) both}
+@keyframes card-in{from{opacity:0;transform:translateY(70px) scale(.94);border-radius:40rem;box-shadow:0 0 0 1px rgba(245,239,227,.14),0 40px 90px rgba(0,0,0,.7)}
+  60%{border-radius:20rem}to{opacity:1;transform:none;border-radius:0;box-shadow:0 0 0 1px rgba(245,239,227,0),0 0 0 rgba(0,0,0,0)}}
+@keyframes card-out{to{opacity:0;transform:translateY(-30px) scale(.97);border-radius:40rem}}
+.page:not([data-page=home]){padding-top:76rem}
 /* i18n: Arabic is RTL, IBM Plex Sans Arabic (brand fallback), no letter-spacing (it breaks the joined script) */
 :root{--dw:400}
 html.i18n-wait body>:not(.loader){visibility:hidden}
@@ -173,8 +181,8 @@ html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
 .svc{padding:40rem 0 0}
 .svc .top{padding:0 var(--pad)}
 .svc ul{list-style:none;padding:0;margin-top:86rem}
-.svc li{position:relative;display:flex;justify-content:center;align-items:flex-start;height:168rem;padding-top:36rem}
-.svc li .n{position:absolute;font:500 32rem/40rem var(--body);letter-spacing:-.32rem;color:var(--accent);margin-top:0}
+.svc li{position:relative;display:flex;justify-content:center;align-items:flex-start;height:178rem;padding-top:46rem}
+.svc li .n{position:absolute;top:0;font:500 32rem/40rem var(--body);letter-spacing:-.32rem;color:var(--accent);margin-top:0}
 .svc li h3{font:var(--dw) 116rem/132rem var(--display);letter-spacing:-5rem;color:var(--dim);transition:color .4s,filter .6s;white-space:nowrap}
 .svc li.on h3{color:#F5EFE3}
 .svc li:hover h3{color:var(--glow)}
@@ -356,6 +364,7 @@ html.loading,html.loading body{overflow:hidden}
 <div class="toast" id="toast" role="status"></div>
 
 <main id="top">
+<div class="page" data-page="home">
 <!-- HERO -->
 <section class="hero">
   <img class="bg" id="hbg" src="img/hero.webp" alt="" fetchpriority="high">
@@ -369,6 +378,9 @@ html.loading,html.loading body{overflow:hidden}
   <div class="begin" data-depth="-.2" aria-label="Let’s begin"><span>Let’s</span><img src="img/pill.webp" alt=""><span>BEGIN</span></div>
 </section>
 
+</div>
+
+<div class="page" data-page="about">
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="shape" aria-hidden="true"></div>
@@ -381,12 +393,18 @@ html.loading,html.loading body{overflow:hidden}
   <div class="logos" aria-hidden="true"><div class="t" id="lg"></div><div class="t" id="lg2"></div></div>
 </section>
 
+</div>
+
+<div class="page" data-page="services">
 <!-- SERVICES -->
 <section class="svc" id="services">
   <div class="top row3" data-r><span class="g">[Over 30+ Skillset]</span><span class="pill-l"><b>Services</b><i>02</i></span><span class="g">[Crafted with passion]</span></div>
   <ul id="svc"></ul>
 </section>
 
+</div>
+
+<div class="page" data-page="works">
 <!-- PROJECTS -->
 <div id="works"></div>
 <div id="projs"></div>
@@ -394,6 +412,9 @@ html.loading,html.loading body{overflow:hidden}
 <!-- FULL BLEED -->
 <section class="bleed reveal"><img src="img/p2.webp" alt="A phone drifting among glowing rocks" loading="lazy"></section>
 
+</div>
+
+<div class="page" data-page="stats">
 <!-- STATS -->
 <section class="stats" id="stats">
   <svg class="rings" viewBox="-500 -500 1000 1000" aria-hidden="true"><g fill="none" stroke="rgba(245,239,227,.12)"><circle r="499"/><circle r="380"/><circle r="270"/></g></svg>
@@ -410,6 +431,9 @@ html.loading,html.loading body{overflow:hidden}
 </section>
 
 
+</div>
+
+<div class="page" data-page="playground">
 <!-- PLAYGROUND -->
 <section class="play" id="playground">
   <h2 data-r>Ta2m’s Playground</h2>
@@ -422,12 +446,18 @@ html.loading,html.loading body{overflow:hidden}
   <div class="qa" data-r><b>Adam Levine</b><span>CEO of Movit</span></div>
 </section>
 
+</div>
+
+<div class="page" data-page="pricing">
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <h2 data-r>Pricing Plan</h2>
   <div class="plans" id="plans"></div>
 </section>
 
+</div>
+
+<div class="page" data-page="location">
 <!-- LOCATION -->
 <section class="loc" id="location">
   <h2 data-r>Location</h2>
@@ -436,6 +466,9 @@ html.loading,html.loading body{overflow:hidden}
   <img class="reveal" src="img/building.webp" alt="Looking up at a tall black and white building" loading="lazy" data-r>
 </section>
 
+</div>
+
+<div class="page" data-page="contact">
 <!-- CTA -->
 <section class="cta" id="cta">
   <p class="gw" data-r>We bring you our <b>Greatest Work</b></p>
@@ -455,6 +488,8 @@ html.loading,html.loading body{overflow:hidden}
     <p class="msg" id="fmsg" role="status"></p>
   </form>
 </section>
+</div>
+
 </main>
 
 <footer>
@@ -569,7 +604,7 @@ $('#pg').innerHTML=['cap','street','quote','g33','suit1','suit2'].map(n=>`<div><
 // pricing
 const PL=[['/01','Best for Personal','Standard Plan','Have design ready to build with small budget?',['Wireframe for project scope','Design using Figma','Implementation with Webflow','Remote / Online collaboration','Delivery within weekdays only','3 months support after launch','Weekly Quality Check'],'$399','/ project',0],['/02','Popular Plan','Premium Plan','Have design ready to build with average budget',['Advanced UX Strategy & Research','High Fidelity Figma UI Design','Custom Development & Animations','CMS Integration & SEO Optimization','Priority Support & Fast Turnaround','Six Months Post Launch Support','Bi Weekly Quality Performance Checks'],'$1200','/ project',1],['/03','Specialized Plan','Custom Plan','Got a design ready? We’ll tailor it to your plan.',['Tailored Scope Based Requirements','Flexible Design Development Workflow','Platform Choice As Preferred','Custom Features & Integrations','Flexible Timeline Based Scope','Ongoing Support As Required','Scheduled Quality Checks Included'],'CONTACT','',0]];
 $('#plans').innerHTML=PL.map(p=>`<article class="plan ${p[7]?'hot':''}" data-r><div class="strip"><span>${p[0]}</span><span>${p[1]}</span></div><h3>${p[2]}</h3><p>${p[3]}</p><button class="btn ${p[7]?'':'out'}" data-plan="${p[2]}">Get This Plan</button><ul>${p[4].map(f=>`<li>${f}</li>`).join('')}</ul><div class="pr">${p[5]}${p[6]?` <small>${p[6]}</small>`:''}</div></article>`).join('');
-$('#plans').onclick=e=>{const b=e.target.closest('[data-plan]');if(!b)return;const pn=tr(b.dataset.plan);$('#ms').value=AR?`أهلًا طقم، أنا مهتم بـ${pn}.`:`Hi Ta2m, I’m interested in the ${pn}.`;toast(AR?`اتضافت ${pn} لرسالتك`:`${pn} added to your message`);const c=document.querySelector('#contact');window.__lenis?window.__lenis.scrollTo(c,{offset:-10}):c.scrollIntoView({behavior:'smooth'})};
+$('#plans').onclick=e=>{const b=e.target.closest('[data-plan]');if(!b)return;const pn=tr(b.dataset.plan);$('#ms').value=AR?`أهلًا طقم، أنا مهتم بـ${pn}.`:`Hi Ta2m, I’m interested in the ${pn}.`;toast(AR?`اتضافت ${pn} لرسالتك`:`${pn} added to your message`);goPage('contact')};
 
 // form
 const BUD=['< $1000','$1,000 - $5,000','$5,000 - $10,000','$10,000 - $15,000'];let bud=-1;
@@ -617,11 +652,12 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   document.documentElement.classList.add('gsap');
   gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
   if(LOADING){lenis.stop();setTimeout(()=>lenis.start(),3400)}
-  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const h=a.getAttribute('href'),t=h==='#top'?0:document.querySelector(h);if(t!==null&&t!==undefined){e.preventDefault();lenis.scrollTo(t,{offset:-10})}});
   gsap.from('#h1',{y:80,opacity:0,duration:1.4,ease:'expo.out',delay:.2+D});
   gsap.from('.hero .tag',{x:-40,opacity:0,duration:1.2,ease:'expo.out',delay:.1+D});
   gsap.from('#phone',{y:260,opacity:0,duration:1.6,ease:'expo.out',delay:.3+D});
   gsap.from('.wedo,.badge,.copy,.year,.begin',{opacity:0,y:30,duration:1,stagger:.1,ease:'expo.out',delay:.8+D});
+  // scroll-linked animations are rebuilt for each page (hidden pages have no layout to measure)
+  window.bindScroll=()=>gsap.context(()=>{
   gsap.to('#hbg',{yPercent:12,scale:1.1,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
   // statement: dim tail brightens as you scroll
   const sw=$$('#stm .w');ScrollTrigger.create({trigger:'.about',start:'top 60%',end:'top -10%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*sw.length);sw.forEach((w,i)=>{w.style.color=(i<11||i<n)?'#F5EFE3':''})}});
@@ -639,6 +675,9 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
     gsap.fromTo(el,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.4,ease:'expo.out',scrollTrigger:st});
     const img=el.tagName==='IMG'?null:el.querySelector('img');
     if(img)gsap.fromTo(img,{scale:1.3},{scale:1,duration:1.4,ease:'expo.out',scrollTrigger:st,clearProps:el.classList.contains('ph')?'transform':''})});
+  gsap.to('#pg',{xPercent:-5,ease:'none',scrollTrigger:{trigger:'.play',start:'top bottom',end:'bottom top',scrub:true}});
+  $$('.oval').forEach((o,i)=>gsap.from(o,{scale:.4,opacity:0,rotate:(i-1)*40,duration:1.2,ease:'back.out(1.4)',scrollTrigger:{trigger:'.exp',start:'top 70%'}}));
+  });
   // cursor (dot + lagging ring) and magnetic buttons, mouse only
   if(matchMedia('(hover:hover) and (min-width:900px)').matches){
     const dot=document.createElement('div'),ring=document.createElement('div');dot.className='cur-dot';ring.className='cur-ring';document.body.append(dot,ring);
@@ -649,9 +688,27 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
     $$('.btn,.nav-cta').forEach(b=>{b.addEventListener('mousemove',e=>{const q=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-q.left-q.width/2)*.35,y:(e.clientY-q.top-q.height/2)*.35,duration:.4,ease:'power3.out'})});
       b.addEventListener('mouseleave',()=>gsap.to(b,{x:0,y:0,duration:1,ease:'elastic.out(1,0.3)'}))});
   }
-  gsap.to('#pg',{xPercent:-5,ease:'none',scrollTrigger:{trigger:'.play',start:'top bottom',end:'bottom top',scrub:true}});
-  $$('.oval').forEach((o,i)=>gsap.from(o,{scale:.4,opacity:0,rotate:(i-1)*40,duration:1.2,ease:'back.out(1.4)',scrollTrigger:{trigger:'.exp',start:'top 70%'}}));
 }else{addEventListener('scroll',()=>onScroll.forEach(f=>f()),{passive:true});$$('#stm .w,#tq .w').forEach(w=>w.style.color='#F5EFE3');$$('[data-n]').forEach(el=>el.textContent=num(+el.dataset.n)+tr(el.dataset.s||''))}
+
+// pages: #about, #services... each open as their own page; back/forward and deep links work
+(()=>{const pages=$$('.page'),keys=pages.map(p=>p.dataset.page),base=document.title;
+  const LABEL={about:'About',services:'Services',works:'Works',stats:'Stats',playground:'Playground',pricing:'Pricing',location:'Location',contact:'Contact'};
+  const keyOf=h=>{const k=(h||'').replace(/^.*#/,'');return keys.includes(k)?k:'home'};
+  let cur=null,busy=false,ctx=null;history.scrollRestoration='manual';
+  const toTop=()=>window.__lenis?window.__lenis.scrollTo(0,{immediate:true,force:true}):scrollTo(0,0);
+  function show(k,first){const next=pages[keys.indexOf(k)];if(next===cur){window.__lenis?window.__lenis.scrollTo(0,{force:true}):scrollTo({top:0,behavior:'smooth'});return}
+    const enter=()=>{if(ctx)ctx.revert();pages.forEach(p=>{p.classList.toggle('is-active',p===next);p.classList.remove('is-leaving')});cur=next;toTop();
+      $$('.nav-links a,.menu a').forEach(a=>keyOf(a.getAttribute('href'))===k&&k!=='home'?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+      const lb=$('#langBtn');lb.href='?lang='+(AR?'en':'ar')+(k==='home'?'':'#'+k);
+      document.title=k==='home'?base:tr(LABEL[k])+' | Ta2m Studio';
+      dispatchEvent(new Event('resize'));
+      if(window.bindScroll)requestAnimationFrame(()=>{ctx=bindScroll();ScrollTrigger.refresh()});
+      busy=false};
+    if(cur&&!first){busy=true;cur.classList.add('is-leaving');setTimeout(enter,380)}else enter()}
+  window.goPage=k=>{if(busy)return;k=keyOf('#'+k);history.pushState(null,'',k==='home'?location.pathname+location.search:'#'+k);show(k)};
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();goPage(keyOf(a.getAttribute('href')))});
+  addEventListener('popstate',()=>show(keyOf(location.hash)));
+  show(keyOf(location.hash),true)})();
 </script>
 </body>
 </html>
