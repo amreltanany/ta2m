@@ -85,9 +85,9 @@ body.menu-lock{overflow:hidden}
 .rdlg{position:fixed;inset:0;margin:auto;border:0;padding:0;background:transparent;max-width:none;max-height:none;overflow:visible}
 .rdlg::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
 .rdlg[open]{animation:card-in .5s cubic-bezier(.22,1,.36,1)}
-.rbox{width:min(400px,92vw);height:min(86vh,720px);border-radius:16px;overflow:hidden;background:#fff}
-.rbox iframe{width:100%;height:100%;border:0;display:block}
-.rx{position:absolute;top:-14px;inset-inline-end:-14px;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#0A0A0A;font-size:26px;line-height:1;z-index:1}
+.rbox{position:relative;width:min(400px,92vw);height:min(80vh,680px);border-radius:16px;overflow:hidden;background:#fff}
+.rbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;pointer-events:none}.rbox iframe.on{opacity:1;pointer-events:auto}
+.rx{position:absolute;bottom:calc(100% + 12px);inset-inline-end:0;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#0A0A0A;display:grid;place-items:center;padding:0;z-index:1}.rx svg{width:16px;height:16px}
 /* arrow: draws itself once it scrolls into view (stroke-dashoffset), mirrored in RTL */
 .arrow{position:relative;z-index:3;display:flex;justify-content:center;margin:-40rem 0 -10rem;color:var(--accent);pointer-events:none}
 .arrow svg{height:max(160rem,110px);width:auto;max-width:66vw;overflow:visible}
@@ -234,9 +234,6 @@ html[lang=ar] .badge .ring text{font:600 19px 'IBM Plex Sans Arabic',sans-serif}
 .proj .ab{margin-top:30rem}.proj .ab b{display:block;font-weight:400}.proj .ab p{color:var(--mute);width:405rem;margin-top:12rem}
 @media(max-width:819px){.proj{padding-top:70rem}.proj .imgw{width:calc(100% - 32rem);height:230rem;margin-top:24rem}.proj h2{font-size:42rem;line-height:42rem;letter-spacing:-2rem}.proj h2 sup{font-size:18rem}.proj .ab p{width:auto}.row3{grid-template-columns:auto 1fr;gap:8rem 14rem;font-size:13rem}.row3>:last-child{grid-column:1/-1;justify-self:start;text-align:left}.row3 .mid{justify-self:end}}
 
-/* full bleed */
-.bleed{height:900rem;overflow:hidden}
-.bleed img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;will-change:transform}
 
 /* stats */
 .stats{padding:90rem 0 0;overflow:hidden}
@@ -403,7 +400,7 @@ html.loading,html.loading body{overflow:hidden}
 </header>
 <nav class="menu" id="menu" aria-label="Main" inert><small>Menu</small><a href="#top">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#works">Portfolio</a><a href="#stats">Stats</a><a href="#playground">Playground</a><a href="#contact">Contact</a></nav>
 <div class="toast" id="toast" role="status"></div>
-<dialog class="rdlg" id="rdlg" aria-label="Reel"><button class="rx" type="button" aria-label="Close">×</button><div class="rbox"></div></dialog>
+<dialog class="rdlg" id="rdlg" aria-label="Reel"><button class="rx" type="button" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button><div class="rbox"></div></dialog>
 <div class="fab" id="fab">
   <a class="fab-wa" id="waBtn" href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg></a>
   <button class="fab-top" id="topBtn" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
@@ -463,7 +460,6 @@ html.loading,html.loading body{overflow:hidden}
 <div id="projs"></div>
 
 <!-- FULL BLEED -->
-<section class="bleed reveal"><img src="img/p2.webp" alt="A phone drifting among glowing rocks" loading="lazy"></section>
 
 </div>
 
@@ -702,11 +698,15 @@ const drawArrows=()=>arrows.forEach(a=>{if(!a.el.classList.contains('is-drawn')&
 measureArrows();setTimeout(drawArrows,LOADING?3300:0);addEventListener('resize',()=>{measureArrows();drawArrows()});onScroll.push(drawArrows);
 // reels open in a dialog with Instagram's embed player; the link still works without JS
 const rd=$('#rdlg');
-document.addEventListener('click',e=>{const a=e.target.closest('[data-reel]');if(!a)return;e.preventDefault();
-  const id=a.href.match(/reel\/([^/]+)/)[1];rd.querySelector('.rbox').innerHTML='<iframe src="https://www.instagram.com/reel/'+id+'/embed/" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Instagram reel"></iframe>';
-  rd.showModal();window.__lenis&&__lenis.stop()});
+const rbox=rd.querySelector('.rbox'),reelId=a=>a.href.match(/reel\/([^/]+)/)[1];
+// every reel's player loads (hidden) as soon as the works page is shown (hidden pages never intersect), so opening one is instant
+const loadReels=()=>$$('[data-reel]').forEach(a=>{const id=reelId(a);if(!rbox.querySelector('[data-id="'+id+'"]'))rbox.insertAdjacentHTML('beforeend','<iframe data-id="'+id+'" src="https://www.instagram.com/reel/'+id+'/embed/" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Instagram reel"></iframe>')});
+const reelIO=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){loadReels();reelIO.disconnect()}},{rootMargin:'100000px 0px'});$$('.reels').forEach(el=>reelIO.observe(el));
+document.addEventListener('click',e=>{const a=e.target.closest('[data-reel]');if(!a)return;e.preventDefault();loadReels();
+  const id=reelId(a);rbox.querySelectorAll('iframe').forEach(f=>f.classList.toggle('on',f.dataset.id===id));rd.showModal();window.__lenis&&__lenis.stop()});
 const closeReel=()=>{rd.close()};rd.querySelector('.rx').onclick=closeReel;rd.onclick=e=>{if(e.target===rd)closeReel()};
-rd.addEventListener('close',()=>{rd.querySelector('.rbox').innerHTML='';window.__lenis&&__lenis.start()});
+// reload the one that played so it stops (and is ready again next time)
+rd.addEventListener('close',()=>{const f=rbox.querySelector('iframe.on');if(f){f.classList.remove('on');f.src=f.src}window.__lenis&&__lenis.start()});
 const fab=$('#fab'),WA_NUMBER='201119708154';// studio WhatsApp (Egypt +20), digits only
 if(WA_NUMBER)$('#waBtn').href='https://wa.me/'+WA_NUMBER;
 onScroll.push(()=>fab.classList.toggle('show',scrollY>innerHeight*.6));
@@ -737,7 +737,7 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   const sw=$$('#stm .w');ScrollTrigger.create({trigger:'.about',start:'top 60%',end:'top -10%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*sw.length);sw.forEach((w,i)=>{w.style.color=(i<11||i<n)?'#F5EFE3':''})}});
   // floating images rise as you scroll down (each at its own speed)
   $$('.fl').forEach(el=>{const s=Math.abs(+el.dataset.par)/80;gsap.fromTo(el,{y:s*150},{y:-s*340,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}})});
-  $$('.imgw img,.bleed img').forEach(el=>gsap.fromTo(el,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
+  $$('.imgw img').forEach(el=>gsap.fromTo(el,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
   // services: the centred word lights up
   $$('#svc li').forEach(li=>ScrollTrigger.create({trigger:li,start:'top 62%',end:'bottom 38%',toggleClass:{targets:li,className:'on'}}));
   gsap.utils.toArray('.svc li h3').forEach(h=>gsap.from(h,{filter:'blur(24px)',opacity:.3,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 92%'}}));
