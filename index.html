@@ -721,7 +721,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 // scroll effects: always on (no reduced-motion gate); content stays visible if the CDNs are blocked
 if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   gsap.registerPlugin(ScrollTrigger);
-  const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});window.__lenis=lenis;
+  const lenis=new Lenis({lerp:.1,wheelMultiplier:1});window.__lenis=lenis;
   lenis.on('scroll',()=>{ScrollTrigger.update();onScroll.forEach(f=>f())});
   document.documentElement.classList.add('gsap');
   gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
