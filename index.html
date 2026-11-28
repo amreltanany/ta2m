@@ -82,6 +82,12 @@ section{position:relative}
 }
 @media(max-width:480px){.nav-cta{display:none}}
 body.menu-lock{overflow:hidden}
+.rdlg{position:fixed;inset:0;margin:auto;border:0;padding:0;background:transparent;max-width:none;max-height:none;overflow:visible}
+.rdlg::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
+.rdlg[open]{animation:card-in .5s cubic-bezier(.22,1,.36,1)}
+.rbox{width:min(400px,92vw);height:min(86vh,720px);border-radius:16px;overflow:hidden;background:#fff}
+.rbox iframe{width:100%;height:100%;border:0;display:block}
+.rx{position:absolute;top:-14px;inset-inline-end:-14px;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#0A0A0A;font-size:26px;line-height:1;z-index:1}
 /* arrow: draws itself once it scrolls into view (stroke-dashoffset), mirrored in RTL */
 .arrow{position:relative;z-index:3;display:flex;justify-content:center;margin:-40rem 0 -10rem;color:var(--accent);pointer-events:none}
 .arrow svg{height:max(160rem,110px);width:auto;max-width:66vw;overflow:visible}
@@ -216,6 +222,12 @@ html[lang=ar] .badge .ring text{font:600 19px 'IBM Plex Sans Arabic',sans-serif}
 .proj{padding-top:120rem}
 .proj .imgw{margin:40rem auto 0;width:854rem;height:540rem;border-radius:16rem;overflow:hidden;position:relative;background:#0a0a0a}
 .proj .imgw img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;will-change:transform}
+.proj .imgw{display:block}.proj .imgw img{transition:scale .8s cubic-bezier(.22,1,.36,1)}.proj .imgw:hover img{scale:1.04}
+.visit{color:var(--accent);border-bottom:1px solid currentColor;padding-bottom:2rem;justify-self:end}
+.reels{padding-top:120rem}.rgrid{display:flex;gap:32rem;justify-content:center;margin-top:40rem;padding:0 var(--pad)}
+.reel{display:block;width:300rem}.reel img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16rem;transition:scale .6s cubic-bezier(.22,1,.36,1)}
+.reel:hover img{scale:1.03}.reel b{display:block;font:var(--dw) 28rem/32rem var(--display);margin-top:18rem}.reel span{color:var(--mute)}
+@media(max-width:819px){.reels{padding-top:70rem}.rgrid{gap:14rem}.reel{width:50%}.reel b{font-size:20rem;line-height:24rem}.reel span{font-size:13rem}}
 .proj .info{padding:40rem var(--pad) 0;position:relative}
 .proj h2{font:var(--dw) 64rem/64rem var(--display);letter-spacing:-3.2rem}
 .proj h2 sup{font:500 32rem/40rem var(--body);letter-spacing:-.32rem;color:var(--accent);vertical-align:top;margin-left:12rem;position:relative;top:4rem}
@@ -265,7 +277,11 @@ html[lang=ar] .badge .ring text{font:600 19px 'IBM Plex Sans Arabic',sans-serif}
 /* pricing */
 .pricing{padding-top:120rem}
 .pricing h2{font:var(--dw) 200rem/200rem var(--display);letter-spacing:-10rem;padding:0 var(--pad);margin-bottom:34rem}
-.plans{display:grid;gap:30rem;padding:0 var(--pad)}
+.plans{display:grid;gap:30rem;padding:0 var(--pad);grid-template-columns:repeat(4,1fr)}
+.plans .plan:last-child{grid-column:1/-1;min-height:0}.plans .plan:last-child ul{grid-template-columns:repeat(2,1fr);column-gap:40rem}
+.plan .pr{font-size:72rem!important;line-height:72rem!important;letter-spacing:-3rem!important}.plan .pr small{display:block;margin:6rem 0 0}
+@media(max-width:1100px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:819px){.plans{grid-template-columns:1fr}.plans .plan:last-child ul{grid-template-columns:1fr}.plan .pr{font-size:60rem!important;line-height:60rem!important}}
 .plan{border:1px solid var(--line);border-radius:16rem;padding:24rem;background:#080808;display:flex;flex-direction:column;min-height:680rem}
 .plan.hot{border-color:rgba(224,184,74,.9);box-shadow:0 0 20px rgba(224,184,74,.4)}
 .plan .strip{display:flex;justify-content:space-between;background:#161616;border-radius:8rem;padding:10rem 14rem;font-size:14rem;line-height:20rem;margin:-6rem -6rem 26rem}
@@ -321,12 +337,13 @@ footer{position:relative;overflow:hidden;margin-top:160rem;padding-top:60rem}
 footer .cols{display:flex;gap:130rem;padding:0 50rem}
 footer h4{font:400 16rem/24rem var(--body);margin-bottom:12rem}
 footer .cols a{display:block;font:var(--dw) 32rem/60rem var(--display);letter-spacing:-.32rem;color:rgba(245,239,227,.3);transition:color .25s,padding .35s var(--ease)}
-footer .cols a:hover{color:var(--glow);padding-left:10rem}
-footer .vw{position:absolute;left:50%;top:60rem;transform:translateX(-50%)}
+footer .cols a:hover{color:var(--glow);padding-inline-start:10rem}
+footer .cols a[href^=mailto],footer .cols a[href^=tel]{text-transform:none;font-family:var(--body);font-size:22rem}
+footer .vw{position:absolute;inset-inline-end:var(--pad);top:60rem}
 .fw{font:var(--dw) 400rem/400rem var(--display);letter-spacing:-20rem;text-align:center;white-space:nowrap;margin:40rem -90rem 0;color:#F5EFE3;background:linear-gradient(#F5EFE3 15%,#E0B84A 55%,#9C7A2A 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;user-select:none;-webkit-mask-image:linear-gradient(#000 30%,transparent 80%);mask-image:linear-gradient(#000 30%,transparent 80%)}
 .fbot{display:flex;justify-content:space-between;padding:10rem var(--pad) 18rem;font-size:13rem;color:var(--mute)}
 footer::before{content:"";position:absolute;left:0;right:0;bottom:0;height:420rem;background:linear-gradient(transparent,rgba(224,184,74,.45));pointer-events:none}
-@media(max-width:819px){footer{margin-top:90rem}footer .cols{gap:60rem;padding:0 var(--pad)}footer .vw{position:static;transform:none;margin:20rem var(--pad) 0;display:inline-block}.fw{font-size:122rem;line-height:122rem;letter-spacing:-6rem;margin:30rem 0 0}}
+@media(max-width:819px){footer{margin-top:90rem}footer .cols{gap:30rem 60rem;padding:0 var(--pad);flex-wrap:wrap}footer .vw{position:static;transform:none;margin:20rem var(--pad) 0;display:inline-block}.fw{font-size:122rem;line-height:122rem;letter-spacing:-6rem;margin:30rem 0 0}}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,300%);opacity:0;pointer-events:none;background:#F5EFE3;color:#0A0A0A;border-radius:var(--pill);padding:12px 22px;font:500 14px var(--body);z-index:90;transition:transform .5s var(--ease),opacity .3s}
 .toast.show{transform:translate(-50%,0);opacity:1}
@@ -386,6 +403,7 @@ html.loading,html.loading body{overflow:hidden}
 </header>
 <nav class="menu" id="menu" aria-label="Main" inert><small>Menu</small><a href="#top">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#works">Portfolio</a><a href="#stats">Stats</a><a href="#playground">Playground</a><a href="#contact">Contact</a></nav>
 <div class="toast" id="toast" role="status"></div>
+<dialog class="rdlg" id="rdlg" aria-label="Reel"><button class="rx" type="button" aria-label="Close">×</button><div class="rbox"></div></dialog>
 <div class="fab" id="fab">
   <a class="fab-wa" id="waBtn" href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg></a>
   <button class="fab-top" id="topBtn" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
@@ -477,8 +495,6 @@ html.loading,html.loading body{overflow:hidden}
     <p data-r>/ Our works showreel showcases<br>all beautiful works we’ve done/</p>
     <div class="words" id="words" aria-label="Bespoke Dynamic Brand Experience"><span class="on">Bespoke</span><span>Dynamic</span><span>Brand</span><span>Experience</span></div>
   </div>
-  <p class="q" id="tq">“ Ta2m is a creative studio build branding and web design for visionary brands clarity. Visualize The Best Products “</p>
-  <div class="qa" data-r><b>Adam Levine</b><span>CEO of Movit</span></div>
 </section>
 
 </div>
@@ -488,17 +504,6 @@ html.loading,html.loading body{overflow:hidden}
 <section class="pricing" id="pricing">
   <h2 data-r>Pricing Plan</h2>
   <div class="plans" id="plans"></div>
-</section>
-
-</div>
-
-<div class="page" data-page="location">
-<!-- LOCATION -->
-<section class="loc" id="location">
-  <h2 data-r>Location</h2>
-  <p class="ph" data-r>(323) 238-0614</p>
-  <p class="g" data-r>909-1/2 E 49th St<br>Los Angeles, California(CA), 90011</p>
-  <img class="reveal" src="img/building.webp" alt="Looking up at a tall black and white building" loading="lazy" data-r>
 </section>
 
 </div>
@@ -515,7 +520,7 @@ html.loading,html.loading body{overflow:hidden}
 <section class="contact" id="contact">
   <div class="pad"><h2 class="d" data-r>Contact<br>Form</h2><p class="lead" data-r>Drop us a line, we’ll reponse you in 24 hours.</p></div>
   <form class="fcard" id="cf" novalidate data-r>
-    <div class="fld"><label for="em">Your Email</label><input id="em" type="email" required autocomplete="email"></div>
+    <div class="fld"><label for="em">Your Email</label><input id="em" type="email" autocomplete="email"></div>
     <div class="fld"><label for="ph">Your Phone</label><input id="ph" type="tel" autocomplete="tel"></div>
     <div class="fld"><label for="ms">Your Message</label><textarea id="ms" rows="2" required></textarea></div>
     <div class="fld"><label>Select your budget</label><div class="chips" id="bud"></div></div>
@@ -530,7 +535,9 @@ html.loading,html.loading body{overflow:hidden}
 <footer>
   <a class="btn vw" href="#works">View Portfolio</a>
   <div class="cols">
-    <div><h4>Menu</h4><a href="#top">Home</a><a href="#about">ABOUT US</a><a href="#works">PORTFOLIO</a><a href="#location">LOCATION</a><a href="#contact">CONTACT US</a></div>
+    <div><h4>Menu</h4><a href="#top">Home</a><a href="#about">ABOUT US</a><a href="#works">PORTFOLIO</a><a href="#contact">CONTACT US</a></div>
+    <div><h4>Follow</h4><a href="https://www.instagram.com/ta2mstudio/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.facebook.com/Ta2mStudio" target="_blank" rel="noopener">FACEBOOK</a><a href="https://www.tiktok.com/@bsholaonline" target="_blank" rel="noopener">TIKTOK</a><a href="https://www.youtube.com/@Ta2mStudio" target="_blank" rel="noopener">YOUTUBE</a></div>
+    <div><h4>Contact</h4><a href="mailto:amr@amreltanany.com" lang="en" dir="ltr">amr@amreltanany.com</a><a href="tel:+201119708154" lang="en" dir="ltr">+20 111 970 8154</a><a href="https://wa.me/201119708154" target="_blank" rel="noopener">WHATSAPP</a></div>
   </div>
   <div class="fw" aria-hidden="true">TA2M</div>
   <div class="fbot"><span>© 2026 Ta2m. All rights reserved.</span><a href="#top">Back to top ↑</a></div>
@@ -552,7 +559,20 @@ const T={
 'A phone showing the Ta2m Studio logo resting on a black rock':'موبايل عليه لوجو طقم ستوديو فوق صخرة سودا',
 'As a tight-knit team of experts, we create memorable and emotional websites, digital experiences, and native apps.':'Ta2m Studio ستوديو مصري بيبني للبراند هويته كلها في مكان واحد: التصوير والتصميم والموقع، وكلهم بنفس الروح.',
 '[Over 30+ Skillset]':'[أكتر من ٣٠ مهارة]','[Crafted with passion]':'[معمولة بشغف]','Motion':'موشن','Branding':'هوية','Graphic':'جرافيك',
-'Projects':'مشاريع','Project Type:':'نوع المشروع:','Date':'التاريخ','UI Design':'تصميم واجهات','App Design':'تصميم تطبيقات',
+'Projects':'مشاريع','Follow':'تابعنا','Contact':'تواصل','INSTAGRAM':'إنستجرام','FACEBOOK':'فيسبوك','TIKTOK':'تيك توك','YOUTUBE':'يوتيوب','WHATSAPP':'واتساب','Opening WhatsApp with your request…':'بنفتحلك واتساب بطلبك…','Reel':'ريل','Instagram reel':'ريل إنستجرام',
+'< 5,000 EGP':'أقل من ٥٬٠٠٠ جنيه','5,000 - 10,000 EGP':'٥٬٠٠٠ - ١٠٬٠٠٠ جنيه','10,000 - 25,000 EGP':'١٠٬٠٠٠ - ٢٥٬٠٠٠ جنيه','25,000+ EGP':'أكتر من ٢٥٬٠٠٠ جنيه',
+'Most popular':'الأكتر طلبًا','Steady':'ثبات','Scale':'نمو','Full team':'فريق كامل','Build your own':'اعملها بنفسك',
+'Accounts':'أكاونتس','Stability Zone':'منطقة الثبات','Ready to Grow':'جاهز تكبر','Partners':'بارتنرز','Custom Plan':'باكدج على مقاسك','CUSTOM':'على مقاسك','EGP / month':'جنيه / شهر',
+'For one brand getting started on social.':'لبراند واحد بيبدأ على السوشيال.','Steady content, every month.':'محتوى ثابت كل شهر.','For brands ready to scale.':'للبراندات الجاهزة تكبر.','Your full creative team.':'فريقك الإبداعي كله.','Pick only what you need.':'اختار اللي محتاجه بس.',
+'Accounts: 1':'عدد الحسابات: ١','6 post designs / account':'٦ تصميمات بوست / حساب','3 reels / account (client footage)':'٣ ريلز / حساب (تصوير العميل)','Platforms: 2 / account':'المنصات: ٢ / حساب','+ Add-ons':'+ إضافات',
+'12 post designs':'١٢ تصميم بوست','4 reels (client footage)':'٤ ريلز (تصوير العميل)','Platforms: 3':'المنصات: ٣','20 post designs':'٢٠ تصميم بوست','10 reels (client footage)':'١٠ ريلز (تصوير العميل)','Platforms: all':'المنصات: كلها',
+'Monthly content plan & scheduling':'خطة محتوى شهرية وجدولة','Moderation, 6 hours a day':'مودريشن ٦ ساعات في اليوم','Ad campaign management (ad spend not included)':'إدارة حملات إعلانية (من غير ميزانية الإعلان)','Website (portfolio, landing page)':'موقع (بورتفوليو أو لاندينج بيدج)','Visual identity':'هوية بصرية','Monthly performance report':'تقرير أداء شهري',
+'Post design: 150 EGP / post':'تصميم بوست: ١٥٠ جنيه / بوست','Reel: 600 EGP / reel':'ريل: ٦٠٠ جنيه / ريل','Long video: 150 EGP / minute':'فيديو طويل: ١٥٠ جنيه / دقيقة','Platform: 200 EGP / platform':'منصة: ٢٠٠ جنيه / منصة','Moderation, 6 hours a day: 2,500 EGP / month':'مودريشن ٦ ساعات في اليوم: ٢٬٥٠٠ جنيه / شهر','Ad campaign management: 3,000 EGP / month':'إدارة حملات إعلانية: ٣٬٠٠٠ جنيه / شهر','Website (portfolio, landing page): 5,000 EGP / year':'موقع (بورتفوليو أو لاندينج بيدج): ٥٬٠٠٠ جنيه / سنة','Website management (hosting, design, security): 1,500 EGP / month':'إدارة الموقع (استضافة وتصميم وحماية): ١٬٥٠٠ جنيه / شهر','Visual identity: 3,000 EGP one-time':'هوية بصرية: ٣٬٠٠٠ جنيه مرة واحدة','Each extra account: +80% on monthly services':'كل حساب زيادة: +٨٠٪ على الخدمات الشهرية','Visit Website ↗':'زور الموقع ↗','Outdoor Advertising':'إعلانات خارجية','Podcast & Publishing':'بودكاست ونشر','Sneaker Store':'متجر كوتشيات','Bakery Website':'موقع مخبز','Creative Agency':'وكالة إبداعية','Qaro2a':'قروءة','Gear Promo Reel':'ريل إعلان معدات ↗','Nutrition Reel':'ريل تغذية ↗','Gear Promo Reel ↗':'ريل إعلان معدات ↗','Nutrition Reel ↗':'ريل تغذية ↗',
+'A bold website for an outdoor advertising agency with 15+ years of billboards, LED screens and events in New Cairo.':'موقع قوي لوكالة إعلانات خارجية بخبرة أكتر من ١٥ سنة في البيلبوردات وشاشات LED والإيفنتات في القاهرة الجديدة.',
+'A bilingual platform for Arabic books, podcast episodes and publishing, with a store and a space for authors.':'منصة بالعربي والإنجليزي للكتب العربية وحلقات البودكاست والنشر، فيها متجر ومساحة للكتّاب.',
+'An online store for sneakers designed in Cairo, with a model carousel, colour picker and size finder.':'متجر أونلاين لكوتشيات متصممة في القاهرة، فيه عرض للموديلات واختيار الألوان والمقاسات.',
+'A playful website for a neighbourhood bakery: the menu, catering and how to visit.':'موقع مرح لمخبز في الحي: المنيو والكاترينج وإزاي تزورهم.',
+'An illustrated Cairo-at-night website for a creative agency, bilingual with pricing and FAQ.':'موقع مرسوم لقاهرة بالليل لوكالة إبداعية، بالعربي والإنجليزي وفيه الأسعار والأسئلة الشائعة.','Project Type:':'نوع المشروع:','Date':'التاريخ','UI Design':'تصميم واجهات','App Design':'تصميم تطبيقات',
 'Modelling 3D Graphic':'جرافيك ثري دي','Mobile App UI':'واجهة تطبيق موبايل','Rebrand Project':'مشروع ريبراند','[About This Project]':'[عن المشروع]',
 'Levi Colwill Website Portfolio is a project build branding and web design for visionary brands clarity.':'بورتفوليو Levi Colwill: هوية وموقع لبراند عنده رؤية واضحة.',
 'A clean, modern news app designed to deliver information in real time without distractions.':'تطبيق أخبار نضيف وحديث، بيوصّل الخبر لحظة بلحظة من غير دوشة.',
@@ -616,17 +636,18 @@ const words=t=>t.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
 // statement: first part white, the tail dim like the original
 const st=tr('As a tight-knit team of experts, we create memorable and emotional websites, digital experiences, and native apps.').split(' ');
 $('#stm').innerHTML=st.map((w,i)=>`<span class="w" data-d="${i>=11?1:0}" style="${i>=11?'':'color:#F5EFE3'}">${w}</span>`).join(' ');
-$('#tq').innerHTML=words(tr($('#tq').textContent.trim()));
+
 
 // logos pills
 const LG=['l1','l2','l3','l4'];$('#lg').innerHTML=$('#lg2').innerHTML=[...LG,...LG,...LG].map(l=>`<div class="p"><img src="img/${l}.svg" alt="" loading="lazy"></div>`).join('');
 
 // services
-$('#svc').innerHTML=['Shooting & Editing','Web Development','Software Development','Mobile Apps','Logo & Identity','Social Media Posts','Brand Guidelines','Photo Editing','Ad Creatives','Print & Packaging'].map((t,i)=>[String(i+1).padStart(2,'0'),t]).map(s=>`<li data-r><span class="n">${s[0]}</span><h3>${s[1]}</h3></li>`).join('');
+$('#svc').innerHTML=['Shooting & Editing','Web Development','Software Development','Mobile Apps','Graphic Design','Logo & Identity','Social Media Posts','Brand Guidelines','Photo Editing','Ad Creatives','Print & Packaging'].map((t,i)=>[String(i+1).padStart(2,'0'),t]).map(s=>`<li data-r><span class="n">${s[0]}</span><h3>${s[1]}</h3></li>`).join('');
 
 // projects
-const PR=[['01','UI Design','Levi Colwill','Modelling 3D Graphic','rock-ring','Levi Colwill Website Portfolio is a project build branding and web design for visionary brands clarity.','July 2025'],['02','App Design','The News','Mobile App UI','p1','A clean, modern news app designed to deliver information in real time without distractions.','Aug 2025'],['03','Branding','Theo Agency','Rebrand Project','glow','A complete rebrand for Theo Agency, crafted to reflect their growth from a boutique studio to a global partner.','Sep 2025']];
-$('#projs').innerHTML=PR.map(p=>`<section class="proj"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>${p[0]}</i></span><span class="mid"><span class="g">Project Type:</span> ${p[1]}</span><span><span class="g">Date</span> ${p[6]}</span></div><div class="imgw reveal" data-r><img src="${IM(p[4])}" alt="${p[2]} project" loading="lazy"></div><div class="info" data-r><h2>${p[2]}<sup>[${p[0]}]</sup><br>${p[3]}</h2><div class="ab"><b>[About This Project]</b><p>${p[5]}</p></div></div></section>`).join('');
+const PR=[['01','Web Development','Display Egypt','Outdoor Advertising','w-displayegypt','A bold website for an outdoor advertising agency with 15+ years of billboards, LED screens and events in New Cairo.','https://displayegypt.com/'],['02','Web Development','Qaro2a','Podcast & Publishing','w-qaro2a','A bilingual platform for Arabic books, podcast episodes and publishing, with a store and a space for authors.','https://qaro2a.com/'],['03','Web Development','Shoess','Sneaker Store','w-shoess','An online store for sneakers designed in Cairo, with a model carousel, colour picker and size finder.','https://amreltanany.github.io/shoess/'],['04','Web Development','Velloura','Bakery Website','w-velloura','A playful website for a neighbourhood bakery: the menu, catering and how to visit.','https://amreltanany.github.io/velloura-bakery/'],['05','Web Development','Cairo Creatives','Creative Agency','w-cairocreatives','An illustrated Cairo-at-night website for a creative agency, bilingual with pricing and FAQ.','https://cairocreatives.com/']];
+const RL=[['Amr Mossad Visual','Gear Promo Reel','w-reel1','https://www.instagram.com/reel/DaGHhlNIZMa/'],['Coach Sama Foad','Nutrition Reel','w-reel2','https://www.instagram.com/reel/DW1ZuyYCKSk/']];
+$('#projs').innerHTML=PR.map(p=>`<section class="proj"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>${p[0]}</i></span><span class="mid"><span class="g">Project Type:</span> ${p[1]}</span><a class="visit" href="${p[6]}" target="_blank" rel="noopener">Visit Website ↗</a></div><a class="imgw reveal" data-r href="${p[6]}" target="_blank" rel="noopener"><img src="${IM(p[4])}" alt="${p[2]} website" loading="lazy"></a><div class="info" data-r><h2>${p[2]}<sup>[${p[0]}]</sup><br>${p[3]}</h2><div class="ab"><b>[About This Project]</b><p>${p[5]}</p></div></div></section>`).join('')+`<section class="reels"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>0${PR.length+1}</i></span><span class="mid"><span class="g">Project Type:</span> Shooting & Editing</span><span></span></div><div class="rgrid">${RL.map(r=>`<a class="reel" data-r href="${r[3]}" target="_blank" rel="noopener" data-reel><img src="${IM(r[2])}" alt="${r[0]} reel" loading="lazy"><b>${r[0]}</b><span>${r[1]} ↗</span></a>`).join('')}</div></section>`;
 
 
 // cta marquee
@@ -637,17 +658,20 @@ $('#cmq').innerHTML=$('#cmq2').innerHTML=Array(6).fill('<span>Contact Us</span>'
 $('#pg').innerHTML=['cap','street','quote','g33','suit1','suit2'].map(n=>`<div><img src="${IM(n)}" alt="" loading="lazy"></div>`).join('');
 
 // pricing
-const PL=[['/01','Best for Personal','Standard Plan','Have design ready to build with small budget?',['Wireframe for project scope','Design using Figma','Implementation with Webflow','Remote / Online collaboration','Delivery within weekdays only','3 months support after launch','Weekly Quality Check'],'$399','/ project',0],['/02','Popular Plan','Premium Plan','Have design ready to build with average budget',['Advanced UX Strategy & Research','High Fidelity Figma UI Design','Custom Development & Animations','CMS Integration & SEO Optimization','Priority Support & Fast Turnaround','Six Months Post Launch Support','Bi Weekly Quality Performance Checks'],'$1200','/ project',1],['/03','Specialized Plan','Custom Plan','Got a design ready? We’ll tailor it to your plan.',['Tailored Scope Based Requirements','Flexible Design Development Workflow','Platform Choice As Preferred','Custom Features & Integrations','Flexible Timeline Based Scope','Ongoing Support As Required','Scheduled Quality Checks Included'],'CONTACT','',0]];
+const PL=[['/01','Most popular','Accounts','For one brand getting started on social.',['Accounts: 1','6 post designs / account','3 reels / account (client footage)','Platforms: 2 / account','+ Add-ons'],'3,000','EGP / month',1],['/02','Steady','Stability Zone','Steady content, every month.',['12 post designs','4 reels (client footage)','Platforms: 3','+ Add-ons'],'5,000','EGP / month',0],['/03','Scale','Ready to Grow','For brands ready to scale.',['20 post designs','10 reels (client footage)','Platforms: all','+ Add-ons'],'10,000','EGP / month',0],['/04','Full team','Partners','Your full creative team.',['20 post designs','10 reels (client footage)','Platforms: all','Monthly content plan & scheduling','Moderation, 6 hours a day','Ad campaign management (ad spend not included)','Website (portfolio, landing page)','Visual identity','Monthly performance report'],'25,000','EGP / month',0],['/05','Build your own','Custom Plan','Pick only what you need.',['Post design: 150 EGP / post','Reel: 600 EGP / reel','Long video: 150 EGP / minute','Platform: 200 EGP / platform','Moderation, 6 hours a day: 2,500 EGP / month','Ad campaign management: 3,000 EGP / month','Website (portfolio, landing page): 5,000 EGP / year','Website management (hosting, design, security): 1,500 EGP / month','Visual identity: 3,000 EGP one-time','Each extra account: +80% on monthly services'],'CUSTOM','',0]];
 $('#plans').innerHTML=PL.map(p=>`<article class="plan ${p[7]?'hot':''}" data-r><div class="strip"><span>${p[0]}</span><span>${p[1]}</span></div><h3>${p[2]}</h3><p>${p[3]}</p><button class="btn ${p[7]?'':'out'}" data-plan="${p[2]}">Get This Plan</button><ul>${p[4].map(f=>`<li>${f}</li>`).join('')}</ul><div class="pr">${p[5]}${p[6]?` <small>${p[6]}</small>`:''}</div></article>`).join('');
 $('#plans').onclick=e=>{const b=e.target.closest('[data-plan]');if(!b)return;const pn=tr(b.dataset.plan);$('#ms').value=AR?`أهلًا طقم، أنا مهتم بـ${pn}.`:`Hi Ta2m, I’m interested in the ${pn}.`;toast(AR?`اتضافت ${pn} لرسالتك`:`${pn} added to your message`);goPage('contact')};
 
 // form
-const BUD=['< $1000','$1,000 - $5,000','$5,000 - $10,000','$10,000 - $15,000'];let bud=-1;
+const BUD=['< 5,000 EGP','5,000 - 10,000 EGP','10,000 - 25,000 EGP','25,000+ EGP'];let bud=-1;
 function bd(){$('#bud').innerHTML=BUD.map((b,i)=>`<button type="button" class="chip" data-i="${i}" aria-pressed="${i===bud}">${b}</button>`).join('')}bd();
 $('#bud').onclick=e=>{const c=e.target.closest('.chip');if(c){bud=bud===+c.dataset.i?-1:+c.dataset.i;bd()}};
-$('#cf').onsubmit=e=>{e.preventDefault();const em=$('#em'),ms=$('#ms');const okE=em.value&&em.checkValidity(),okM=ms.value.trim().length>3;em.setAttribute('aria-invalid',!okE);ms.setAttribute('aria-invalid',!okM);const m=$('#fmsg');
+$('#cf').onsubmit=e=>{e.preventDefault();const em=$('#em'),ms=$('#ms');const okE=!em.value||em.checkValidity(),okM=ms.value.trim().length>3;em.setAttribute('aria-invalid',!okE);ms.setAttribute('aria-invalid',!okM);const m=$('#fmsg');
   if(!okE||!okM){m.textContent=tr(!okE?'Please enter a valid email.':'Please tell us a little about your project.');return}
-  m.textContent=tr('Thank you! We’ll respond within 24 hours. (Demo: nothing was sent.)');e.target.reset();bud=-1;bd()};
+  const L=AR?['طلب جديد من الموقع','الإيميل','الموبايل','الميزانية','الرسالة']:['New request from the website','Email','Phone','Budget','Message'];
+  const txt=[L[0],em.value&&L[1]+': '+em.value,$('#ph').value&&L[2]+': '+$('#ph').value,bud>-1&&L[3]+': '+tr(BUD[bud]),L[4]+': '+ms.value.trim()].filter(Boolean).join('\n');
+  window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(txt),'_blank','noopener');
+  m.textContent=tr('Opening WhatsApp with your request…');e.target.reset();bud=-1;bd()};
 
 applyLang();
 
@@ -676,6 +700,13 @@ const arrows=$$('.arrow').map(el=>({el,top:0}));
 const measureArrows=()=>arrows.forEach(a=>{const r=a.el.getBoundingClientRect();a.top=r.height?r.top+scrollY+r.height/4:Infinity});
 const drawArrows=()=>arrows.forEach(a=>{if(!a.el.classList.contains('is-drawn')&&scrollY+innerHeight>a.top)a.el.classList.add('is-drawn')});
 measureArrows();setTimeout(drawArrows,LOADING?3300:0);addEventListener('resize',()=>{measureArrows();drawArrows()});onScroll.push(drawArrows);
+// reels open in a dialog with Instagram's embed player; the link still works without JS
+const rd=$('#rdlg');
+document.addEventListener('click',e=>{const a=e.target.closest('[data-reel]');if(!a)return;e.preventDefault();
+  const id=a.href.match(/reel\/([^/]+)/)[1];rd.querySelector('.rbox').innerHTML='<iframe src="https://www.instagram.com/reel/'+id+'/embed/" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Instagram reel"></iframe>';
+  rd.showModal();window.__lenis&&__lenis.stop()});
+const closeReel=()=>{rd.close()};rd.querySelector('.rx').onclick=closeReel;rd.onclick=e=>{if(e.target===rd)closeReel()};
+rd.addEventListener('close',()=>{rd.querySelector('.rbox').innerHTML='';window.__lenis&&__lenis.start()});
 const fab=$('#fab'),WA_NUMBER='201119708154';// studio WhatsApp (Egypt +20), digits only
 if(WA_NUMBER)$('#waBtn').href='https://wa.me/'+WA_NUMBER;
 onScroll.push(()=>fab.classList.toggle('show',scrollY>innerHeight*.6));
@@ -704,7 +735,6 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   gsap.to('#hbg',{yPercent:12,scale:1.1,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
   // statement: dim tail brightens as you scroll
   const sw=$$('#stm .w');ScrollTrigger.create({trigger:'.about',start:'top 60%',end:'top -10%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*sw.length);sw.forEach((w,i)=>{w.style.color=(i<11||i<n)?'#F5EFE3':''})}});
-  const qw=$$('#tq .w');ScrollTrigger.create({trigger:'#tq',start:'top 80%',end:'bottom 45%',scrub:true,onUpdate:s=>{const n=Math.round(s.progress*qw.length);qw.forEach((w,i)=>w.style.color=i<n?'#F5EFE3':'')}});
   // floating images rise as you scroll down (each at its own speed)
   $$('.fl').forEach(el=>{const s=Math.abs(+el.dataset.par)/80;gsap.fromTo(el,{y:s*150},{y:-s*340,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}})});
   $$('.imgw img,.bleed img').forEach(el=>gsap.fromTo(el,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
@@ -731,7 +761,7 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
     $$('.btn,.nav-cta').forEach(b=>{b.addEventListener('mousemove',e=>{const q=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-q.left-q.width/2)*.35,y:(e.clientY-q.top-q.height/2)*.35,duration:.4,ease:'power3.out'})});
       b.addEventListener('mouseleave',()=>gsap.to(b,{x:0,y:0,duration:1,ease:'elastic.out(1,0.3)'}))});
   }
-}else{addEventListener('scroll',()=>onScroll.forEach(f=>f()),{passive:true});$$('#stm .w,#tq .w').forEach(w=>w.style.color='#F5EFE3');$$('[data-n]').forEach(el=>el.textContent=num(+el.dataset.n)+tr(el.dataset.s||''))}
+}else{addEventListener('scroll',()=>onScroll.forEach(f=>f()),{passive:true});$$('#stm .w').forEach(w=>w.style.color='#F5EFE3');$$('[data-n]').forEach(el=>el.textContent=num(+el.dataset.n)+tr(el.dataset.s||''))}
 
 // pages: #about, #services... each open as their own page; back/forward and deep links work
 (()=>{const pages=$$('.page'),keys=pages.map(p=>p.dataset.page),base=document.title;
