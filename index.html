@@ -219,6 +219,21 @@ html[lang=ar] .badge .ring text{font:600 19px 'IBM Plex Sans Arabic',sans-serif}
 @media(max-width:819px){.svc ul{margin-top:36rem}.svc li{height:auto;padding:22rem var(--pad) 8rem}.svc li h3{font-size:44rem;line-height:48rem;letter-spacing:-1.5rem;white-space:normal;text-align:center}.svc li .n{font-size:18rem;line-height:24rem;left:var(--pad)}}
 
 /* projects */
+.cats{padding-top:120rem}.cats h2{font:var(--dw) 200rem/200rem var(--display);letter-spacing:-10rem;padding:0 var(--pad);margin-bottom:34rem}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24rem;padding:0 var(--pad)}
+.ccard{display:block;text-align:start;color:inherit;background:none;border:0;padding:0;font:inherit;cursor:pointer;position:relative}
+.ccard .cv{display:block;aspect-ratio:7/6;border-radius:16rem;overflow:hidden;background:#141414}
+.ccard img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:scale .8s cubic-bezier(.22,1,.36,1)}.ccard:hover img{scale:1.05}
+.ccard>i{position:absolute;top:16rem;inset-inline-start:16rem;font:500 14rem/28rem var(--body);font-style:normal;background:#F5EFE3;color:#0A0A0A;border-radius:var(--pill);padding:0 12rem}
+.ccard b{display:block;font:var(--dw) 40rem/44rem var(--display);letter-spacing:-1.2rem;margin-top:18rem}.ccard .cc{color:var(--mute)}.ccard:hover .cc{color:var(--accent)}
+.ccard.soon{cursor:default}.ccard.soon .cv{display:grid;place-items:center;border:1px dashed rgba(245,239,227,.25);background:none;color:var(--mute);font:var(--dw) 32rem/1 var(--display)}
+.cat{display:none;padding-top:110rem}.in-cat .cats{display:none}.in-cat .cat.on{display:block}
+.back{display:inline-flex;align-items:center;gap:10rem;background:none;border:1px solid rgba(245,239,227,.3);color:inherit;border-radius:var(--pill);padding:10rem 20rem 10rem 14rem;font:500 16rem/24rem var(--body);cursor:pointer;transition:border-color .3s,color .3s}
+.back:hover{border-color:var(--accent);color:var(--accent)}.back svg{width:22rem;height:22rem}html[dir=rtl] .back svg{transform:scaleX(-1)}
+.ch{font:var(--dw) 120rem/120rem var(--display);letter-spacing:-5rem;padding:0 var(--pad);margin-top:30rem}
+.cat .proj:first-of-type,.cat .reels{padding-top:60rem}
+@media(max-width:819px){.cats{padding-top:70rem}.cats h2{font-size:84rem;line-height:84rem;letter-spacing:-4rem}.cgrid{grid-template-columns:1fr;gap:30rem}.ccard .cv{aspect-ratio:16/10}.ccard b{font-size:30rem;line-height:34rem}
+  .cat{padding-top:80rem}.back{font-size:14rem}.ch{font-size:56rem;line-height:56rem;letter-spacing:-2.4rem}.ccard.soon .cv{font-size:24rem}}
 .proj{padding-top:120rem}
 .proj .imgw{margin:40rem auto 0;width:854rem;height:540rem;border-radius:16rem;overflow:hidden;position:relative;background:#0a0a0a}
 .proj .imgw img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;will-change:transform}
@@ -457,6 +472,7 @@ html.loading,html.loading body{overflow:hidden}
 <div class="page" data-page="works">
 <!-- PROJECTS -->
 <div id="works"></div>
+<section class="cats" id="cats"><h2 data-r>Portfolio</h2><div class="cgrid" id="cgrid"></div></section>
 <div id="projs"></div>
 
 <!-- FULL BLEED -->
@@ -555,7 +571,7 @@ const T={
 'A phone showing the Ta2m Studio logo resting on a black rock':'موبايل عليه لوجو طقم ستوديو فوق صخرة سودا',
 'As a tight-knit team of experts, we create memorable and emotional websites, digital experiences, and native apps.':'Ta2m Studio ستوديو مصري بيبني للبراند هويته كلها في مكان واحد: التصوير والتصميم والموقع، وكلهم بنفس الروح.',
 '[Over 30+ Skillset]':'[أكتر من ٣٠ مهارة]','[Crafted with passion]':'[معمولة بشغف]','Motion':'موشن','Branding':'هوية','Graphic':'جرافيك',
-'Projects':'مشاريع','Follow':'تابعنا','Contact':'تواصل','INSTAGRAM':'إنستجرام','FACEBOOK':'فيسبوك','TIKTOK':'تيك توك','YOUTUBE':'يوتيوب','WHATSAPP':'واتساب','Opening WhatsApp with your request…':'بنفتحلك واتساب بطلبك…','Reel':'ريل','Instagram reel':'ريل إنستجرام',
+'Projects':'مشاريع','All Work':'كل الشغل','Coming soon':'قريبًا','Follow':'تابعنا','Contact':'تواصل','INSTAGRAM':'إنستجرام','FACEBOOK':'فيسبوك','TIKTOK':'تيك توك','YOUTUBE':'يوتيوب','WHATSAPP':'واتساب','Opening WhatsApp with your request…':'بنفتحلك واتساب بطلبك…','Reel':'ريل','Instagram reel':'ريل إنستجرام',
 '< 5,000 EGP':'أقل من ٥٬٠٠٠ جنيه','5,000 - 10,000 EGP':'٥٬٠٠٠ - ١٠٬٠٠٠ جنيه','10,000 - 25,000 EGP':'١٠٬٠٠٠ - ٢٥٬٠٠٠ جنيه','25,000+ EGP':'أكتر من ٢٥٬٠٠٠ جنيه',
 'Most popular':'الأكتر طلبًا','Steady':'ثبات','Scale':'نمو','Full team':'فريق كامل','Build your own':'اعملها بنفسك',
 'Accounts':'أكاونتس','Stability Zone':'منطقة الثبات','Ready to Grow':'جاهز تكبر','Partners':'بارتنرز','Custom Plan':'باكدج على مقاسك','CUSTOM':'على مقاسك','EGP / month':'جنيه / شهر',
@@ -643,8 +659,15 @@ $('#svc').innerHTML=['Shooting & Editing','Web Development','Software Developmen
 // projects
 const PR=[['01','Web Development','Display Egypt','Outdoor Advertising','w-displayegypt','A bold website for an outdoor advertising agency with 15+ years of billboards, LED screens and events in New Cairo.','https://displayegypt.com/'],['02','Web Development','Qaro2a','Podcast & Publishing','w-qaro2a','A bilingual platform for Arabic books, podcast episodes and publishing, with a store and a space for authors.','https://qaro2a.com/'],['03','Web Development','Shoess','Sneaker Store','w-shoess','An online store for sneakers designed in Cairo, with a model carousel, colour picker and size finder.','https://amreltanany.github.io/shoess/'],['04','Web Development','Velloura','Bakery Website','w-velloura','A playful website for a neighbourhood bakery: the menu, catering and how to visit.','https://amreltanany.github.io/velloura-bakery/'],['05','Web Development','Cairo Creatives','Creative Agency','w-cairocreatives','An illustrated Cairo-at-night website for a creative agency, bilingual with pricing and FAQ.','https://cairocreatives.com/']];
 const RL=[['Amr Mossad Visual','Gear Promo Reel','w-reel1','https://www.instagram.com/reel/DaGHhlNIZMa/'],['Coach Sama Foad','Nutrition Reel','w-reel2','https://www.instagram.com/reel/DW1ZuyYCKSk/']];
-$('#projs').innerHTML=PR.map(p=>`<section class="proj"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>${p[0]}</i></span><span class="mid"><span class="g">Project Type:</span> ${p[1]}</span><a class="visit" href="${p[6]}" target="_blank" rel="noopener">Visit Website ↗</a></div><a class="imgw reveal" data-r href="${p[6]}" target="_blank" rel="noopener"><img src="${IM(p[4])}" alt="${p[2]} website" loading="lazy"></a><div class="info" data-r><h2>${p[2]}<sup>[${p[0]}]</sup><br>${p[3]}</h2><div class="ab"><b>[About This Project]</b><p>${p[5]}</p></div></div></section>`).join('')+`<section class="reels"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>0${PR.length+1}</i></span><span class="mid"><span class="g">Project Type:</span> Shooting & Editing</span><span></span></div><div class="rgrid">${RL.map(r=>`<a class="reel" data-r href="${r[3]}" target="_blank" rel="noopener" data-reel><img src="${IM(r[2])}" alt="${r[0]} reel" loading="lazy"><b>${r[0]}</b><span>${r[1]} ↗</span></a>`).join('')}</div></section>`;
+$('#projs').innerHTML=`<div class="cat" data-cat="web"><div class="pad"><button class="back" type="button" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>All Work</span></button></div><h3 class="ch">Web Development</h3>`+PR.map(p=>`<section class="proj"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>${p[0]}</i></span><span class="mid"><span class="g">Project Type:</span> ${p[1]}</span><a class="visit" href="${p[6]}" target="_blank" rel="noopener">Visit Website ↗</a></div><a class="imgw reveal" data-r href="${p[6]}" target="_blank" rel="noopener"><img src="${IM(p[4])}" alt="${p[2]} website" loading="lazy"></a><div class="info" data-r><h2>${p[2]}<sup>[${p[0]}]</sup><br>${p[3]}</h2><div class="ab"><b>[About This Project]</b><p>${p[5]}</p></div></div></section>`).join('')+`</div><div class="cat" data-cat="video"><div class="pad"><button class="back" type="button" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>All Work</span></button></div><h3 class="ch">Shooting & Editing</h3><section class="reels"><div class="row3 pad" data-r><span class="pill-l"><b>Projects</b><i>0${PR.length+1}</i></span><span class="mid"><span class="g">Project Type:</span> Shooting & Editing</span><span></span></div><div class="rgrid">${RL.map(r=>`<a class="reel" data-r href="${r[3]}" target="_blank" rel="noopener" data-reel><img src="${IM(r[2])}" alt="${r[0]} reel" loading="lazy"><b>${r[0]}</b><span>${r[1]} ↗</span></a>`).join('')}</div></section></div>`;
 
+const CATS=[['web','Web Development',PR.length,'w-displayegypt'],['video','Shooting & Editing',RL.length,'w-reel1'],['graphic','Graphic Design',0,'']];
+$('#cgrid').innerHTML=CATS.map((c,i)=>c[2]?`<button class="ccard" type="button" data-open="${c[0]}" data-r><span class="cv"><img src="${IM(c[3])}" alt="" loading="lazy"></span><i>0${i+1}</i><b>${c[1]}</b><span class="cc">${c[2]} <span>Projects</span> ↗</span></button>`
+  :`<div class="ccard soon" data-r><span class="cv"><span>Coming soon</span></span><i>0${i+1}</i><b>${c[1]}</b><span class="cc">Coming soon</span></div>`).join('');
+// a category opens its list in place; the arrow goes back to the cards
+const wp=$('[data-page=works]');
+const openCat=c=>{wp.classList.toggle('in-cat',!!c);$$('.cat').forEach(el=>el.classList.toggle('on',el.dataset.cat===c));window.rebind&&rebind()};
+wp.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o)openCat(o.dataset.open);else if(e.target.closest('[data-back]'))openCat(null)});
 
 // cta marquee
 $('#cmq').innerHTML=$('#cmq2').innerHTML=Array(6).fill('<span>Contact Us</span>').join('');
@@ -701,7 +724,7 @@ const rd=$('#rdlg');
 const rbox=rd.querySelector('.rbox'),reelId=a=>a.href.match(/reel\/([^/]+)/)[1];
 // every reel's player loads (hidden) as soon as the works page is shown (hidden pages never intersect), so opening one is instant
 const loadReels=()=>$$('[data-reel]').forEach(a=>{const id=reelId(a);if(!rbox.querySelector('[data-id="'+id+'"]'))rbox.insertAdjacentHTML('beforeend','<iframe data-id="'+id+'" src="https://www.instagram.com/reel/'+id+'/embed/" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Instagram reel"></iframe>')});
-const reelIO=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){loadReels();reelIO.disconnect()}},{rootMargin:'100000px 0px'});$$('.reels').forEach(el=>reelIO.observe(el));
+const reelIO=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){loadReels();reelIO.disconnect()}},{rootMargin:'100000px 0px'});reelIO.observe($('#cats'));
 document.addEventListener('click',e=>{const a=e.target.closest('[data-reel]');if(!a)return;e.preventDefault();loadReels();
   const id=reelId(a);rbox.querySelectorAll('iframe').forEach(f=>f.classList.toggle('on',f.dataset.id===id));rd.showModal();window.__lenis&&__lenis.stop()});
 const closeReel=()=>{rd.close()};rd.querySelector('.rx').onclick=closeReel;rd.onclick=e=>{if(e.target===rd)closeReel()};
@@ -772,7 +795,7 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   const toTop=()=>window.__lenis?window.__lenis.scrollTo(0,{immediate:true,force:true}):scrollTo(0,0);
   const goTo=a=>{const t=a?document.getElementById(a):0;window.__lenis?window.__lenis.scrollTo(t,{offset:-80,force:true}):(t?t.scrollIntoView({behavior:'smooth'}):scrollTo({top:0,behavior:'smooth'}))};
   function show(k,first,anchor){const next=pages[keys.indexOf(k)],id=anchor||k;if(next===cur){goTo(anchor);mark(id);return}
-    const enter=()=>{if(ctx)ctx.revert();pages.forEach(p=>{p.classList.toggle('is-active',p===next);p.classList.remove('is-leaving')});cur=next;toTop();
+    const enter=()=>{if(ctx)ctx.revert();next.classList.remove('in-cat');pages.forEach(p=>{p.classList.toggle('is-active',p===next);p.classList.remove('is-leaving')});cur=next;toTop();
       mark(id);
       dispatchEvent(new Event('resize'));
       requestAnimationFrame(()=>{if(window.bindScroll){ctx=bindScroll();ScrollTrigger.refresh()}if(anchor)setTimeout(()=>goTo(anchor),first&&LOADING?3500:0)});
@@ -781,6 +804,7 @@ if(window.gsap&&window.ScrollTrigger&&window.Lenis){
   function mark(id){$$('.nav-links a,.menu a').forEach(a=>raw(a.getAttribute('href'))===id&&id!=='home'?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
     $('#langBtn').href='?lang='+(AR?'en':'ar')+(id==='home'?'':'#'+id);
     document.title=id==='home'?base:tr(LABEL[id])+' | Ta2m Studio'}
+  window.rebind=()=>{toTop();if(ctx)ctx.revert();requestAnimationFrame(()=>{if(window.bindScroll){ctx=bindScroll();ScrollTrigger.refresh()}})};
   window.goPage=h=>{if(busy)return;const k=keyOf('#'+h),a=anchorOf('#'+h);history.pushState(null,'',k==='home'&&!a?location.pathname+location.search:'#'+(a||k));show(k,false,a)};
   document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();goPage(raw(a.getAttribute('href')))});
   addEventListener('popstate',()=>show(keyOf(location.hash),false,anchorOf(location.hash)));
